@@ -36,13 +36,30 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                         <a href="{{ route('home') }}" class="nav-link">
-                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            <i class="fas fa-tachometer-alt"></i>
                             DASHBOARD
                         </a>
+                        @can('services.access')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-bell-concierge"></i> SERVICES
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="">Bars and Lounge</a></li>
+                              <li><a class="dropdown-item" href="">Restaurant</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="">Conference Facilities</a></li>
+                              <li><a class="dropdown-item" href="{{ route('rooms') }}">Rooms</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="">Grounds</a></li>
+                              <li><a class="dropdown-item" href="">Swimming Pool</a></li>
+                            </ul>
+                        </li>
+                        @endcan
                         @can('users.access')
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-users mr-3"></i> USERS
+                                <i class="fa-solid fa-users"></i> USERS
                             </a>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="{{ route('users') }}">View</a></li>

@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,20 @@ Route::group(['prefix' => 'users'], function(){
             Route::get('{permission}/edit', 'edit')->name('permissions.edit');
             Route::put('{permission}/edit', 'update');
             Route::delete('{permission}/delete', 'destroy')->name('permissions.delete');
+        });
+    });
+});
+
+Route::group(['prefix' => 'services'], function(){
+    Route::group(['prefix' => 'rooms'], function(){
+        Route::controller(RoomController::class)->group(function(){
+            Route::get('data', 'index')->name('rooms');
+            Route::get('create', 'create')->name('rooms.create');
+            Route::post('create', 'store');
+            Route::get('{room}/show', 'show')->name('rooms.show');
+            Route::get('{room}/edit', 'edit')->name('rooms.edit');
+            Route::put('{room}/edit', 'update');
+            Route::delete('{room}/delete', 'destroy')->name('rooms.delete');
         });
     });
 });

@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
         DB::table('settings')->insert([
             [
                 'setting_key' => 'hotel_name',
-                'setting_value' => 'Grey\'s Oak',
+                'setting_value' => 'Conrad Resort',
             ],
             [
                 'setting_key' => 'hotel_country',
@@ -38,11 +38,11 @@ class SettingSeeder extends Seeder
             ],
             [
                 'setting_key' => 'hotel_email',
-                'setting_value' => 'info@greysoak.com',
+                'setting_value' => 'info@conradresort.com',
             ],
             [
                 'setting_key' => 'hotel_website',
-                'setting_value' => 'greysoak.com',
+                'setting_value' => 'conradresort.com',
             ],
             [
                 'setting_key' => 'hotel_pin',
