@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -16,6 +17,10 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('permissions.access')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $data = [];
         $permissions = Permission::where('parent_id', 0)->get();
         foreach ($permissions as $permission) {
@@ -39,6 +44,10 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('permissions.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $parent_permissions = Permission::where('parent_id', 0)->get();
         
         return view('users.permissions.create', [
@@ -51,6 +60,10 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('permissions.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $this->validate($request, [
             'name' => 'required'
         ]);
@@ -67,6 +80,10 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
+        if (Gate::denies('permissions.view')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         return view('users.permissions.show', [
             'permission' => $permission,
         ]);
@@ -77,6 +94,10 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        if (Gate::denies('permissions.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $parent_permission = Permission::where('parent_id', 0)->get();
         
         if ($permission->parent_id == 0) {
@@ -97,6 +118,10 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
+        if (Gate::denies('permissions.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $this->validate($request, [
             'name' => 'required'
         ]);
@@ -111,6 +136,10 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
+        if (Gate::denies('permissions.delete')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $permission->delete();
 
         return redirect()->route('permissions')->with('message', 'Permission deleted.');

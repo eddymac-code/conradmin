@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -17,6 +18,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('roles.access')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $roles = Role::all();
         return view('users.roles.data', [
             'roles' => $roles,
@@ -28,6 +33,10 @@ class RoleController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('roles.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         return view('users.roles.create');
     }
 
@@ -36,6 +45,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('roles.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         $this->validate($request, [
             'name' => 'required'
         ]);
@@ -50,6 +63,10 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
+        if (Gate::denies('roles.view')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $users = User::all();
         return view('users.roles.show', [
             'role' => $role,
@@ -62,6 +79,10 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        if (Gate::denies('roles.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         return view('users.roles.edit', ['role' => $role]);
     }
 
@@ -70,6 +91,10 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        if (Gate::denies('roles.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $this->validate($request, [
             'name' => 'required'
         ]);
@@ -84,6 +109,10 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        if (Gate::denies('roles.delete')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $role->delete();
 
         return redirect()->route('roles')->with('message', 'Role deleted.');
@@ -91,6 +120,10 @@ class RoleController extends Controller
 
     public function toUser(Request $request, Role $role)
     {
+        if (Gate::denies('roles.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $this->validate($request, [
             'user' => 'required'
         ]);
@@ -104,6 +137,10 @@ class RoleController extends Controller
 
     public function assignPermissionsIndex(Role $role)
     {
+        if (Gate::denies('roles.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $data = [];
         $permissions = Permission::where('parent_id', 0)->get();
         foreach ($permissions as $permission) {
@@ -122,7 +159,10 @@ class RoleController extends Controller
 
     public function assignPermissionsGo(Request $request, Role $role)
     {
-        // dd($request->permission_id);
+        if (Gate::denies('roles.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         $permissions = [];
 
         if (!empty($request->permission_id)) {

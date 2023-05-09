@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoomController extends Controller
 {
@@ -12,6 +13,10 @@ class RoomController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('rooms.access')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         $rooms = Room::paginate(10);
 
         return view('room.data', [
@@ -24,7 +29,14 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        if (Gate::denies('rooms.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
+        $roomTypes = ['Standard','Executive','Deluxe'];
+        return view('room.create', [
+            'roomTypes' => $roomTypes
+        ]);
     }
 
     /**
@@ -32,7 +44,9 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Gate::denies('rooms.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
     }
 
     /**
@@ -40,7 +54,9 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        //
+        if (Gate::denies('rooms.view')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
     }
 
     /**
@@ -48,7 +64,9 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        //
+        if (Gate::denies('rooms.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
     }
 
     /**
@@ -56,7 +74,9 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        //
+        if (Gate::denies('rooms.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
     }
 
     /**
@@ -64,6 +84,8 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        if (Gate::denies('rooms.delete')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
     }
 }

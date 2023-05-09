@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomTypeController;
+use App\Models\Amenity;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +81,32 @@ Route::group(['prefix' => 'users'], function(){
 
 Route::group(['prefix' => 'services'], function(){
     Route::group(['prefix' => 'rooms'], function(){
+        Route::group(['prefix' => 'type'], function(){
+            Route::controller(RoomTypeController::class)->group(function(){
+                Route::get('data', 'index')->name('rooms.types');
+                Route::get('create', 'create')->name('rooms.types.create');
+                Route::post('create', 'store');
+                Route::get('{roomType}/show', 'show')->name('rooms.types.show');
+                Route::get('{roomType}/edit', 'edit')->name('rooms.types.edit');
+                Route::put('{roomType}/edit', 'update');
+                Route::delete('{roomType}/delete', 'destroy')->name('rooms.types.delete');
+
+            });
+
+            Route::group(['prefix' => 'amenity'], function(){
+                Route::controller(Amenity::class)->group(function(){
+                    Route::get('data', 'index')->name('amenities');
+                    Route::get('create', 'create')->name('amenities.create');
+                    Route::post('create', 'store');
+                    Route::get('{amenity}/show', 'show')->name('amenities.show');
+                    Route::get('{amenity}/edit', 'edit')->name('amenities.edit');
+                    Route::put('{amenity}/edit', 'update');
+                    Route::delete('{amenity}/delete', 'destroy')->name('amenities.delete');
+    
+                });
+            });
+        });
+
         Route::controller(RoomController::class)->group(function(){
             Route::get('data', 'index')->name('rooms');
             Route::get('create', 'create')->name('rooms.create');

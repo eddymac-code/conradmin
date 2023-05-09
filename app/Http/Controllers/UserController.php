@@ -34,6 +34,10 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('users.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         return view('users.create');
     }
 
@@ -42,6 +46,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('users.create')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email'],
@@ -74,6 +82,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        if (Gate::denies('users.view')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         return view('users.show', [
             'user' => $user
         ]);
@@ -84,6 +96,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if (Gate::denies('users.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
         return view('users.edit', [
             'user' => $user
         ]);
@@ -94,6 +110,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (Gate::denies('users.update')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email'],
@@ -103,7 +123,10 @@ class UserController extends Controller
         $setuser = User::find($user->id);
         $setuser->name = $request->name;
         $setuser->email = $request->email;
-        $setuser->password = Hash::make($request->password);
+
+        if (!empty($request->password)) {
+            $setuser->password = Hash::make($request->password);
+        }
 
         if ($request->hasFile('photo')) {
             $destination = 'public/images/users';
@@ -124,6 +147,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if (Gate::denies('users.delete')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+        
         if ($user->id === 1) {
             return redirect()->route('users')->with('message', 'This user is essential to the system!');
         }
