@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmenityController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -9,7 +10,6 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
-use App\Models\Amenity;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,11 +94,12 @@ Route::group(['prefix' => 'services'], function(){
             });
 
             Route::group(['prefix' => 'amenity'], function(){
-                Route::controller(Amenity::class)->group(function(){
+                Route::controller(AmenityController::class)->group(function(){
                     Route::get('data', 'index')->name('amenities');
                     Route::get('create', 'create')->name('amenities.create');
                     Route::post('create', 'store');
-                    Route::get('{amenity}/show', 'show')->name('amenities.show');
+                    Route::get('{amenity}/assign', 'show')->name('amenities.assign');
+                    Route::post('{amenity}/assign', 'assignRoomTypes');
                     Route::get('{amenity}/edit', 'edit')->name('amenities.edit');
                     Route::put('{amenity}/edit', 'update');
                     Route::delete('{amenity}/delete', 'destroy')->name('amenities.delete');

@@ -18,7 +18,8 @@
                     <h3>Amenities</h3>
                     <ul class="list-group">
                         @forelse ($roomType->amenities as $amenity)
-                        <li class="list-group-item"><img src="{{  }}" alt="Amenity Icon" class="mr-3">{{ $amenity->name }}</li>
+                        <li class="list-group-item"><img src="{{ asset('storage/images/rooms/amenities/'.$amenity->image) }}"
+                             alt="Amenity Icon" style="width:30px;height:30px;" class="mr-3">{{ $amenity->name }}</li>
                         @empty
                         <li class="list-group-item">No amenities for this room type yet.</li>
                         @endforelse

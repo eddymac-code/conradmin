@@ -6,6 +6,7 @@
             <h2>Rooms</h2>
             <p class="lead">Info for all hotel rooms at a glance.</p>
         </div>
+        
         <div class="my-2">
             <a href="{{ route('rooms.create') }}" class="btn btn-primary float-md-end">Add Room</a>
         </div>

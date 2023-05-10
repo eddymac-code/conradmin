@@ -50,6 +50,10 @@
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="">Conference Facilities</a></li>
                               <li><a class="dropdown-item" href="{{ route('rooms') }}">Rooms</a></li>
+                              @can ('roomtypes.access')
+                              <li><a class="dropdown-item" href="{{ route('rooms.types') }}">Room Types</a></li>
+                              <li><a class="dropdown-item" href="{{ route('amenities') }}">Amenities</a></li>
+                              @endcan
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="">Grounds</a></li>
                               <li><a class="dropdown-item" href="">Swimming Pool</a></li>

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Amenity;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class AmenityController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -69,17 +73,36 @@ class AmenityController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Assign the specified resource.
      */
     public function show(Amenity $amenity)
     {
-        if (Gate::denies('roomtypes.view')) {
+        if (Gate::denies('roomtypes.assign')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
 
-        return view('room.amenity.show', [
-            'amenity' => $amenity
+        $roomTypes = RoomType::all();
+
+        return view('room.amenity.assign', [
+            'amenity' => $amenity,
+            'roomTypes' => $roomTypes
         ]);
+    }
+
+    /**
+     * Assign the specified resource.
+     */
+    public function assignRoomtypes(Amenity $amenity, Request $request)
+    {
+        if (Gate::denies('roomtypes.assign')) {
+            return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
+        }
+
+        $assigned = $amenity->roomTypes()->sync($request->types);
+
+        if ($assigned) {
+            return redirect()->route('amenities.assign', $amenity)->with('message', "Room types assigned successfully!");
+        }
     }
 
     /**

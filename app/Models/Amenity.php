@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Amenity extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'image'
+    ];
+
+    public function roomTypes()
+    {
+        return $this->belongsToMany(RoomType::class);
+    }
 }
