@@ -40,7 +40,7 @@
                         @foreach ($rooms as $room)
                             <tr>
                                 <th scope="row">{{ ++$i }}</th>
-                                <td><span class="fw-bold">{{ $room->type }}</span></td>
+                                <td><span class="fw-bold">{{ $room->roomType->name }}</span></td>
                                 <td><span class="fw-bold">{{ $room->number }}</span></td>
                                 <td>
                                     <span class="fw-bold">

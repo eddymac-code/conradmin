@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -37,7 +38,7 @@ class RoomController extends Controller
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
         
-        $roomTypes = ['Standard','Executive','Deluxe'];
+        $roomTypes = RoomType::all();
         return view('room.create', [
             'roomTypes' => $roomTypes
         ]);
@@ -51,6 +52,35 @@ class RoomController extends Controller
         if (Gate::denies('rooms.create')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
+
+        $this->validate($request, [
+            'type' => 'required',
+            'number' => 'required',
+            'price' => 'required',
+            'image' => 'mimes:jpg,jpeg,png'
+        ]);
+
+        $room = new Room();
+        $room->type = $request->type;
+        $room->number = $request->number;
+        $room->name = $request->name;
+        $room->description = $request->description;
+        $room->price = $request->price;
+
+        if ($request->hasFile('image')) {
+            $destination = 'public/images/rooms';
+            $image = $request->file('image');
+            $image_name = date("YmdHis").$image->getClientOriginalName();
+            $path = $image->storeAs($destination, $image_name);
+
+            if ($path) {
+                $room->image = $image_name;
+            }
+        }
+
+        $room->save();
+
+        return redirect()->route('rooms')->with('message', 'Room Added Successfully!');
     }
 
     /**
@@ -71,6 +101,13 @@ class RoomController extends Controller
         if (Gate::denies('rooms.update')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
+
+        $roomtypes = RoomType::all();
+
+        return view('room.edit', [
+            'room' => $room,
+            'roomTypes' => $roomtypes
+        ]);
     }
 
     /**
@@ -81,6 +118,35 @@ class RoomController extends Controller
         if (Gate::denies('rooms.update')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
+
+        $this->validate($request, [
+            'type' => 'required',
+            'number' => 'required',
+            'price' => 'required',
+            'image' => 'mimes:jpg,jpeg,png'
+        ]);
+
+        $setroom = Room::find($room->id);
+        $setroom->type = $request->type;
+        $setroom->number = $request->number;
+        $setroom->name = $request->name;
+        $setroom->description = $request->description;
+        $setroom->price = $request->price;
+
+        if ($request->hasFile('image')) {
+            $destination = 'public/images/rooms';
+            $image = $request->file('image');
+            $image_name = date("YmdHis").$image->getClientOriginalName();
+            $path = $image->storeAs($destination, $image_name);
+
+            if ($path) {
+                $setroom->image = $image_name;
+            }
+        }
+
+        $setroom->save();
+
+        return redirect()->route('rooms')->with('message', 'Room Updated Successfully!');
     }
 
     /**

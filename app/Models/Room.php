@@ -16,7 +16,11 @@ class Room extends Model
         'description',
         'price',
         'image',
-        'amenities',
         'status',
     ];
+
+    public function roomType()
+    {
+        return $this->belongsTo(RoomType::class);
+    }
 }
