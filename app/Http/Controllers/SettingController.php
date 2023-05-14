@@ -39,6 +39,7 @@ class SettingController extends Controller
         Setting::where('setting_key', 'hotel_email')->update(['setting_value' => $request->hotel_email]);
         Setting::where('setting_key', 'hotel_website')->update(['setting_value' => $request->hotel_website]);
         Setting::where('setting_key', 'hotel_pin')->update(['setting_value' => $request->hotel_pin]);
+        Setting::where('setting_key', 'hotel_phone')->update(['setting_value' => $request->hotel_phone]);
         Setting::where('setting_key', 'hotel_currency')->update(['setting_value' => $request->hotel_currency]);
         Setting::where('setting_key', 'currency_symbol')->update(['setting_value' => $request->currency_symbol]);
         Setting::where('setting_key', 'currency_position')->update(['setting_value' => $request->currency_position]);

@@ -49,6 +49,10 @@ class SettingSeeder extends Seeder
                 'setting_value' => 'pin',
             ],
             [
+                'setting_key' => 'hotel_phone',
+                'setting_value' => '+254 100 000 000',
+            ],
+            [
                 'setting_key' => 'hotel_currency',
                 'setting_value' => 'KES',
             ],

@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ \App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}
                 </a>
             </div>    
         </nav>

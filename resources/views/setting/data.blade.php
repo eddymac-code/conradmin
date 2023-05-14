@@ -77,6 +77,15 @@
             </div>
             <div class="mb-3">
                 <div class="row">
+                <div class="col-md-12">
+                    <label for="phone" class="form-label">Hotel Phone Number</label>
+                    <input type="tel" name="hotel_phone" class="form-control" id="phone" 
+                    value="{{ \App\Models\Setting::where('setting_key', 'hotel_phone')->first()->setting_value }}">
+                </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
                 <div class="col-md-6">
                     <label for="currency" class="form-label">Currency</label>
                     <input type="text" name="hotel_currency" class="form-control" 

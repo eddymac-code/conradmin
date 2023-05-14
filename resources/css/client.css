@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+/* Bootstrap */
+@import 'bootstrap';
+
+*{
+    margin: 0;
+}
+
+body{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff9f;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+  }
+  
+  .navbar__logo img {
+    max-width: 100%;
+    width: 100px;
+  }
+  
+  .navbar__menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .navbar__menu li {
+    margin-left: 1.5rem;
+    list-style-type: none;
+  }
+  
+  .navbar__menu li > a {
+    text-transform: uppercase;
+    text-decoration: none;
+    /* color: #012353; parliament-blue */ 
+    color: darkslategray;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .navbar__menu li:first-child {
+    margin-left: 0;
+  }
+  
+  .slider {
+    position: relative;
+    height: 100vh;
+  }
+  
+  .slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .slider img.active {
+    opacity: 1;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .buttons button {
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .buttons button:hover {
+    background-color: #555;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .text h1 {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    color: white;
+  }
+  
+  .text p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .text button {
+    padding: 2rem 5rem;
+    border: 0.3rem solid;
+    border-radius: 0;
+    background-color: transparent;
+    color: #c3c3c3;
+    cursor: pointer;
+
+    font-size: larger;
+    letter-spacing: 0.3rem;
+  }
+  
+  .text button:hover {
+    color: goldenrod;
+    border-color: goldenrod;
+  }
+
+  .contact-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #012353;
+    color: goldenrod;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+  }
+  
+  .contact-menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .contact-menu li {
+    margin-left: 1.5rem;
+    list-style-type: none;
+    letter-spacing: 0.1rem;
+    text-decoration: underline;
+    line-height: 1rem;
+    font-weight: bold;
+  }
+  
