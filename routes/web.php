@@ -1,15 +1,22 @@
 <?php
 
-use App\Http\Controllers\AmenityController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AmenityController;
+use App\Http\Controllers\Client\ConferenceFacilitiesPageController;
+use App\Http\Controllers\Client\ContactsPageController;
+use App\Http\Controllers\Client\FunAndFitnessPageController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\RoomTypeController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Client\HomePageController;
+use App\Http\Controllers\Client\OpenAirEventsPageController;
+use App\Http\Controllers\Client\RestaurantAndBarPageController;
+use App\Http\Controllers\Client\RoomPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +36,13 @@ Route::get('/clear-cache', function () {
 
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomePageController::class, 'index'])->name('client.home');
+Route::get('/rooms', [RoomPageController::class, 'index'])->name('client.rooms');
+Route::get('/restaurants-bars', [RestaurantAndBarPageController::class, 'index'])->name('client.restaurantbar');
+Route::get('/conference-facilities', [ConferenceFacilitiesPageController::class, 'index'])->name('client.conferences');
+Route::get('/fun-fitness', [FunAndFitnessPageController::class, 'index'])->name('client.funfitness');
+Route::get('open-air-events', [OpenAirEventsPageController::class, 'index'])->name('client.openairevents');
+Route::get('/contacts', [ContactsPageController::class, 'index'])->name('client.contacts');
 
 Auth::routes();
 
@@ -90,7 +101,6 @@ Route::group(['prefix' => 'services'], function(){
                 Route::get('{roomType}/edit', 'edit')->name('rooms.types.edit');
                 Route::put('{roomType}/edit', 'update');
                 Route::delete('{roomType}/delete', 'destroy')->name('rooms.types.delete');
-
             });
 
             Route::group(['prefix' => 'amenity'], function(){
@@ -103,7 +113,6 @@ Route::group(['prefix' => 'services'], function(){
                     Route::get('{amenity}/edit', 'edit')->name('amenities.edit');
                     Route::put('{amenity}/edit', 'update');
                     Route::delete('{amenity}/delete', 'destroy')->name('amenities.delete');
-    
                 });
             });
         });

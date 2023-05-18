@@ -26,41 +26,49 @@
             <img src="{{ asset('img/logo.png') }}" alt="Logo">
           </a>
         </div>
-        <ul class="navbar__menu">
+        {{-- <ul class="navbar__menu">
           <li><a href="#">Home</a></li>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Services</a></li>
           <li><a href="#">Contact Us</a></li>
-        </ul>
+        </ul> --}}
     </nav>
       
-    @yield('content')
-    <script>
-      function openPageSection(pageName, elmnt, color) {
-        // Hide all elements with class="tab-content" by default */
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
+    @yield('landing')
 
-        // Remove the background color of all tablinks/buttons
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].style.backgroundColor = "";
-          tablinks[i].style.color = "";
-        }
+    <div id="maincontent">
+      <nav class="newnav">
+        <ul>
+          <li><a class="nav-link" href="{{ route('client.home') }}">Overview</a></li>
+          <li><a class="nav-link" href="{{ route('client.rooms') }}">Rooms</a></li>
+          <li><a class="nav-link" href="{{ route('client.restaurantbar') }}">Restaurant and Bars</a></li>
+          <li><a class="nav-link" href="{{ route('client.conferences') }}">Conference Facilities</a></li>
+          <li><a class="nav-link" href="{{ route('client.funfitness') }}">Fun and Fitness</a></li>
+          <li><a class="nav-link" href="{{ route('client.openairevents') }}">Open Air Events</a></li>
+          <li><a class="nav-link" href="{{ route('client.contacts') }}">Contact Us</a></li>
+        </ul>
+      </nav>
+      @yield('content')
+    </div>
 
-        // Show the specific tab content
-        document.getElementById(pageName).style.display = "block";
+    <footer>
+      <div class="footer-content">
+        <div class="blue-div">
+          Some Links Here
+        </div>
+        <div class="remaining-div">
+          <p>&copy; <span id="year"></span> {{ App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</p>
+        </div>
+      </div>
+    {{-- </footer>
 
-        // Add the specific color to the button used to open the tab content
-        elmnt.style.backgroundColor = color;
-        elmnt.style.color = 'goldenrod';
-      }
-
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
+    <footer id="mainfooter">
+      <div class="footer-links">
+        Some Links here
+      </div>
+      <div class="footer-info">
+        <p>&copy; <span id="year"></span> {{ App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</p>
+      </div>
+    </footer> --}}
 </body>
 </html>
