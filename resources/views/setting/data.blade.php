@@ -19,28 +19,6 @@
             <form action="{{ route('settings.edit') }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <button class="nav-link tablink" onclick="openPageSection('General', this, event)" id="defaultOpen">General</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link tablink" onclick="openPageSection('Overview', this, event)">Overview</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link tablink" onclick="openPageSection('Restbar', this, event)">Restaurant and Bars</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link tablink" onclick="openPageSection('Confac', this, event)">Conference Facilities</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link tablink" onclick="openPageSection('FNF', this, event)">Fun and Fitness</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link tablink" onclick="openPageSection('OAE', this, event)">Open Air Events</button>
-                </li>
-            </ul>
-
-            <div id="General" class="tabcontent">
                 <div class="mb-3">
                     <div class="row">
                     <div class="col-md-6">
@@ -149,27 +127,7 @@
                     <div class="clearfix"></div>
                     @endif
                 </div>
-            </div>
-            <div id="Overview" class="tabcontent">
-                <h3>Overview</h3>
-                <p>Some about overview</p>
-            </div>
-            <div id="Restbar" class="tabcontent">
-                <h3>Restbar</h3>
-                <p>For restaurants and bars</p>
-            </div>
-            <div id="Confac" class="tabcontent">
-                <h3>Conferencing</h3>
-                <p>For conference facilities</p>
-            </div>
-            <div id="FNF" class="tabcontent">
-                <h3>Fun and Fitness</h3>
-                <p>Fo swimming and gym</p>
-            </div>
-            <div id="OAE" class="tabcontent">
-                <h3>Open Air events</h3>
-                <p>For open air events</p>
-            </div>
+            
             <button type="submit" class="mb-3 btn btn-primary float-end">Update</button>
             </form>
         </div>
@@ -177,20 +135,4 @@
     </section>
     <!-- /.content -->
   </div>
-@endsection
-@section('footer-scripts')
-    <script>
-        function openPageSection(pageName,elmnt, event) {
-            event.preventDefault();
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-            }
-            document.getElementById(pageName).style.display = "block";
-        }
-        
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
 @endsection

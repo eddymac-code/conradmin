@@ -87,6 +87,9 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('settings') }}">Details</a></li>
+                                @can('pages.access')
+                                    <li><a class="dropdown-item" href="{{ route('pages') }}">Page Settings</a></li>
+                                @endcan
                                 </ul>
                             </li>
                             @endcan

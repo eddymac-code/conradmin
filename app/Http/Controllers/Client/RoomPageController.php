@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Page;
 
 class RoomPageController extends Controller
 {
@@ -14,6 +14,9 @@ class RoomPageController extends Controller
     
     public function index()
     {
-        return view('client.rooms');
+        $page = Page::where('title', 'Rooms')->first();
+        return view('client.rooms', [
+            'page' => $page
+        ]);
     }
 }

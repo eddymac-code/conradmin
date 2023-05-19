@@ -1,4 +1,4 @@
-import '../css/client.css';
+// import '../css/client.css';
 
 // Get the homepage URL
 var homepageURL = window.location.origin;

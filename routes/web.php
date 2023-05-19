@@ -7,16 +7,18 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AmenityController;
-use App\Http\Controllers\Client\ConferenceFacilitiesPageController;
-use App\Http\Controllers\Client\ContactsPageController;
-use App\Http\Controllers\Client\FunAndFitnessPageController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Client\PageController;
 use App\Http\Controllers\Client\HomePageController;
+use App\Http\Controllers\Client\RoomPageController;
+use App\Http\Controllers\Client\ContactsPageController;
+use App\Http\Controllers\Client\FunAndFitnessPageController;
 use App\Http\Controllers\Client\OpenAirEventsPageController;
 use App\Http\Controllers\Client\RestaurantAndBarPageController;
-use App\Http\Controllers\Client\RoomPageController;
+use App\Http\Controllers\Client\ConferenceFacilitiesPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,5 +135,17 @@ Route::group(['prefix' => 'setting'], function(){
     Route::controller(SettingController::class)->group(function(){
         Route::get('data', 'index')->name('settings');
         Route::put('edit', 'update')->name('settings.edit');
+    });
+});
+
+Route::group(['prefix' => 'pages'], function(){
+    Route::controller(PageController::class)->group(function(){
+        Route::get('data', 'index')->name('pages');
+        Route::get('create', 'create')->name('pages.create');
+        Route::post('create', 'store');
+        Route::get('{id}/show', 'show')->name('pages.show');
+        Route::get('{id}/edit', 'edit')->name('pages.edit');
+        Route::put('{id}/edit', 'update');
+        Route::delete('{id}/delete', 'destroy')->name('pages.delete');
     });
 });

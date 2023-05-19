@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ \App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</title>
 
-    @vite('resources/js/client.js')
+    @vite(['resources/css/client.css','resources/js/client.js'])
 </head>
 <body>
     <div class="contact-tab">

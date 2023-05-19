@@ -19,3 +19,7 @@
     </div> --}}
     {{-- <div id="firstpagecalc"></div> --}}
 @endsection
+
+@section('content')
+    {!! $page->content !!}
+@endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
@@ -14,6 +15,10 @@ class HomePageController extends Controller
     
     public function index()
     {
-        return view('client.welcome');
+        $page = Page::where('title', 'Overview')->first();
+
+        return view('client.welcome', [
+            'page' => $page
+        ]);
     }
 }
