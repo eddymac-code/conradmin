@@ -11,5 +11,41 @@
 @endsection
 
 @section('content')
-    {!! $page->content !!}
+    <div class="content-box" id="content-box">
+        {!! $page->content !!}
+    </div>
+    <span id="toggleButton" onclick="toggleContent()">Read More...</span>
+    <hr>
+    <div class="row">
+        <h4>Available Room Types</h4>
+        @foreach ($roomType as $room)
+        <div class="col-4 card-row">
+            <div class="card rounded-2 card-column">
+                <img src="{{ asset('storage/images/rooms/types/'.$room->image) }}" alt="Room Type" style="height:30vh;width:100%;object-fit:cover">
+                <div class="card-container">
+                    <h5>{{ $room->name }}</h5>
+                    <p>{{ $room->description ?? '' }}</p>
+                    <p><button class="button">Check available rooms</button></p>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+@endsection
+
+@section('footer-scripts')
+    <script>
+        function toggleContent() {
+            var content = document.getElementById("content-box");
+            var toggleButton = document.getElementById("toggleButton");
+
+            if (content.classList.contains("expanded")) {
+                content.classList.remove("expanded");
+                toggleButton.innerHTML = "Read More...";
+            } else {
+                content.classList.add("expanded");
+                toggleButton.innerHTML = "Read Less";
+            }
+        }
+    </script>
 @endsection

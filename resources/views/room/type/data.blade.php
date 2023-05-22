@@ -22,13 +22,14 @@
                     <th scope="col">#</th>
                     <th scope="col">NAME</th>
                     <th scope="col">AMENITIES</th>
+                    <th scope="col">IMAGE</th>
                     <th scope="col">ACTION</th>
                   </tr>
                 </thead>
                 <tbody>
                     @if ($roomTypes->count() < 1)
                         <tr>
-                           <td colspan="4" class="text-center">No Room Types here yet</td> 
+                           <td colspan="5" class="text-center">No Room Types here yet</td> 
                         </tr>
                     @else
                         @php
@@ -39,6 +40,7 @@
                                 <th scope="row">{{ ++$i }}</th>
                                 <td><span class="fw-bold">{{ $type->name }}</span></td>
                                 <td><span class="fw-bold">{{ $type->amenities->count() }}</span></td>
+                                <td><img style="width:30px;height:30px" src="{{ asset('storage/images/rooms/types/'.$type->image) }}" alt="" class="rounded"></td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

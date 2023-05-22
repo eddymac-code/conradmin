@@ -70,7 +70,7 @@ class RoomController extends Controller
         if ($request->hasFile('image')) {
             $destination = 'public/images/rooms';
             $image = $request->file('image');
-            $image_name = date("YmdHis").$image->getClientOriginalName();
+            $image_name = $image->getClientOriginalName();
             $path = $image->storeAs($destination, $image_name);
 
             if ($path) {
@@ -91,6 +91,10 @@ class RoomController extends Controller
         if (Gate::denies('rooms.view')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
+
+        return view('room.show', [
+            'room' => $room
+        ]);
     }
 
     /**
@@ -136,7 +140,7 @@ class RoomController extends Controller
         if ($request->hasFile('image')) {
             $destination = 'public/images/rooms';
             $image = $request->file('image');
-            $image_name = date("YmdHis").$image->getClientOriginalName();
+            $image_name = $image->getClientOriginalName();
             $path = $image->storeAs($destination, $image_name);
 
             if ($path) {
@@ -157,5 +161,8 @@ class RoomController extends Controller
         if (Gate::denies('rooms.delete')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
+
+        $room->delete();
+        return redirect()->route('rooms')->with('message', 'Room Deleted!');
     }
 }

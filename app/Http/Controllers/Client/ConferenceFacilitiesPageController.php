@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class ConferenceFacilitiesPageController extends Controller
@@ -14,6 +15,9 @@ class ConferenceFacilitiesPageController extends Controller
     
     public function index()
     {
-        return view('client.conferences');
+        $page = Page::where('title', 'Conference Facilities')->first();
+        return view('client.conferences', [
+            'page' => $page
+        ]);
     }
 }

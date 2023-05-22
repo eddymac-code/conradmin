@@ -12,7 +12,8 @@ class RoomType extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'image'
     ];
 
     public function rooms()

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OpenAirEventsPageController extends Controller
 {
@@ -14,6 +15,9 @@ class OpenAirEventsPageController extends Controller
     
     public function index()
     {
-        return view('client.openairevents');
+        $page = Page::where('title', 'Open Air Events')->first();
+        return view('client.openairevents', [
+            'page' => $page
+        ]);
     }
 }

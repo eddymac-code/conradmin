@@ -27,6 +27,20 @@
                         <label for="description" class="form-label">Description</label>
                         <textarea name="description" class="form-control" id="description" cols="30" rows="10">{{ $roomType->description }}</textarea>
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('image') border border-danger @enderror" name="image" id="image">
+                        @error('image')
+                            <div class="mt-2 text-danger fs-6">
+                                 {{ $message }}
+                            </div>
+                        @enderror 
+                    </div>
+                    @if($roomType->image)
+                    <div class="mb-3">
+                        <img style="width:50px;height:50px" src="{{ asset('storage/images/rooms/types/'.$roomType->image) }}" alt="" class="rounded">
+                    </div>
+                   @endif
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>

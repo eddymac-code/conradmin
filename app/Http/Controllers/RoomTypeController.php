@@ -56,6 +56,18 @@ class RoomTypeController extends Controller
         $type = new RoomType();
         $type->name = $request->name;
         $type->description = $request->description;
+
+        if ($request->hasFile('image')) {
+            $destination = 'public/images/rooms/types';
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $path = $image->storeAs($destination, $image_name);
+
+            if ($path) {
+                $type->image = $image_name;
+            }
+        }
+
         $type->save();
 
         return redirect()->route('rooms.types')->with('message', 'Successfully added!');
@@ -102,12 +114,22 @@ class RoomTypeController extends Controller
             'name' => 'required',
         ]);
 
-        $data = [];
+        $type = RoomType::find($roomType->id);
+        $type->name = $request->name;
+        $type->description = $request->description;
 
-        $data['name'] = $request->name;
-        $data['description'] = $request->description;
+        if ($request->hasFile('image')) {
+            $destination = 'public/images/rooms/types';
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $path = $image->storeAs($destination, $image_name);
 
-        $roomType->update($data);
+            if ($path) {
+                $type->image = $image_name;
+            }
+        }
+
+        $type->save();
 
         return redirect()->route('rooms.types')->with('message', 'Successfully updated!');
     }

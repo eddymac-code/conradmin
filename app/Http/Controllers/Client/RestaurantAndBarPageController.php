@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class RestaurantAndBarPageController extends Controller
 {
@@ -14,6 +15,9 @@ class RestaurantAndBarPageController extends Controller
     
     public function index()
     {
-        return view('client.restaurantbar');
+        $page = Page::where('title', 'Restaurant and Bars')->first();
+        return view('client.restaurantbar', [
+            'page' => $page
+        ]);
     }
 }

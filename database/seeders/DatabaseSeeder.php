@@ -22,7 +22,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class, 
             SettingSeeder::class, 
             RolesAndPermissionsSeeder::class,
-            RoomTypeSeeder::class
+            RoomTypeSeeder::class,
+            AmenitySeeder::class,
+            AmenityRoomTypeSeeder::class,
+            RoomSeeder::class,
+            PageSeeder::class
         ]);
     }
 }

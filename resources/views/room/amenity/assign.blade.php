@@ -6,6 +6,10 @@
             <h2> Assign Amenity</h2>
             <p class="lead">Link a room amenity to room types here</p>
         </div>
+        <div class="my-2">
+            <a href="{{ route('amenities') }}" class="btn btn-info float-md-end">Go Back</a>
+        </div>
+        <div class="clearfix"></div>
         @if (session('message'))
             <div class="p-2 my-2 rounded bg-success text-white text-center fw-bold">
                 {{ session('message') }}

@@ -9,7 +9,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ \App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</title>
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/conrad.ico') }}">
     @vite(['resources/css/client.css','resources/js/client.js'])
 </head>
 <body>
@@ -54,7 +54,9 @@
     <footer>
       <div class="footer-content">
         <div class="blue-div">
-          Some Links Here
+          <div class="maincontent">
+            Some Links Here
+          </div>
         </div>
         <div class="remaining-div">
           <p>&copy; <span id="year"></span> {{ App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</p>
@@ -70,5 +72,6 @@
         <p>&copy; <span id="year"></span> {{ App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</p>
       </div>
     </footer> --}}
+  @yield('footer-scripts')
 </body>
 </html>

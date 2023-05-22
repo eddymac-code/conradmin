@@ -16,15 +16,18 @@ class RoomTypeSeeder extends Seeder
         DB::table('room_types')->insert([
             [
                 'name' => 'Standard',
-                'description' => '',
+                'description' => 'Bed, private bathroom, and basic amenities for maximum value.',
+                'image' => 'room1.jpg'
             ],
             [
                 'name' => 'Deluxe',
-                'description' => '',
+                'description' => 'Upgraded amenities, more space, and enhanced features, for a more luxurious experience.',
+                'image' => 'room2.jpg'
             ],
             [
                 'name' => 'Executive',
-                'description' => '',
+                'description' => 'For business travelers and holidaymakers seeking a more upscale experience.',
+                'image' => 'room4.jpg'
             ],
         ]);
     }

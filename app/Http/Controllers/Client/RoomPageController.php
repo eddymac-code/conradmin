@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page;
+use App\Models\RoomType;
 
 class RoomPageController extends Controller
 {
@@ -15,8 +16,10 @@ class RoomPageController extends Controller
     public function index()
     {
         $page = Page::where('title', 'Rooms')->first();
+        $roomType = RoomType::all();
         return view('client.rooms', [
-            'page' => $page
+            'page' => $page,
+            'roomType' => $roomType
         ]);
     }
 }

@@ -15,12 +15,13 @@
             <div class="col-md-6">
                 <form action="{{ route('amenities.edit', $amenity) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <h3>Create Amenity</h3>
                     </div>
                     <div class="form-group mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" value="{{ $amenity->name) }}">
+                        <input type="text" class="form-control" name="name" id="name" value="{{ $amenity->name }}">
                     </div>
                     <div class="form-group mb-3">
                         <label for="image" class="form-label">Image</label>

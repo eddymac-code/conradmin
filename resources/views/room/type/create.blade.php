@@ -26,6 +26,15 @@
                         <label for="description" class="form-label">Description</label>
                         <textarea name="description" class="form-control" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('image') border border-danger @enderror" name="image" id="image">
+                        @error('image')
+                            <div class="mt-2 text-danger fs-6">
+                                 {{ $message }}
+                            </div>
+                        @enderror 
+                    </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>

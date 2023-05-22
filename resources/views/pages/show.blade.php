@@ -6,7 +6,10 @@
             <h2>Page: {{ $page->title }}</h2>
             <p class="lead">Here, you will find all info on the page.</p>
         </div>
-
+        <div class="my-2">
+            <a href="{{ route('pages') }}" class="btn btn-info float-md-end">Go Back</a>
+        </div>
+        <div class="clearfix"></div>
         @if (session('message'))
             <div class="p-2 my-2 rounded bg-success text-white text-center fw-bold">
                 {{ session('message') }}

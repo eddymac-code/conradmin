@@ -99,3 +99,12 @@ function assignActivestatus() {
   });
 }
 
+function toggleContent() {
+  var content = document.getElementById("content-box");
+  var toggleButton = document.getElementById("toggleButton");
+
+  content.classList.toggle("expanded");
+  toggleButton.classList.toggle("collapsed");
+}
+
+
