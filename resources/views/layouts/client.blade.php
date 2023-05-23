@@ -14,6 +14,9 @@
 </head>
 <body>
     <div class="contact-tab">
+        <div class="hotel-brand">
+          <h2>{{ App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</h2>
+        </div>
         <ul class="contact-menu">
             <li><i class="fa fa-thin fa-globe"></i> {{ App\Models\Setting::where('setting_key', 'hotel_address')->first()->setting_value }}</li>
             <li><i class="fa fa-thin fa-envelope"></i> {{ App\Models\Setting::where('setting_key', 'hotel_email')->first()->setting_value }}</li>
@@ -48,6 +51,28 @@
           <li><a class="nav-link" href="{{ route('client.contacts') }}">Contact Us</a></li>
         </ul>
       </nav>
+      {{-- <select class="mobilenav" name="" id="">
+        <a class="mobi-link" href="{{ route('client.home') }}">Overview</a>
+        <a class="mobi-link" href="{{ route('client.rooms') }}">Rooms</a>
+        <a class="mobi-link" href="{{ route('client.restaurantbar') }}">Restaurant and Bars</a>
+        <a class="mobi-link" href="{{ route('client.conferences') }}">Conference Facilities</a>
+        <a class="mobi-link" href="{{ route('client.funfitness') }}">Fun and Fitness</a>
+        <a class="mobi-link" href="{{ route('client.openairevents') }}">Open Air Events</a>
+        <a class="mobi-link" href="{{ route('client.contacts') }}">Contact Us</a>
+      </select> --}}
+      <div class="mobilenav">
+        <p id="activeMobileLinkSpace" onclick="expandOnMobile()"></p>
+        <!-- Navigation links (hidden by default) -->
+        <div id="mobileLinks">
+          <a class="mobi-link" href="{{ route('client.home') }}">Overview</a>
+          <a class="mobi-link" href="{{ route('client.rooms') }}">Rooms</a>
+          <a class="mobi-link" href="{{ route('client.restaurantbar') }}">Restaurant and Bars</a>
+          <a class="mobi-link" href="{{ route('client.conferences') }}">Conference Facilities</a>
+          <a class="mobi-link" href="{{ route('client.funfitness') }}">Fun and Fitness</a>
+          <a class="mobi-link" href="{{ route('client.openairevents') }}">Open Air Events</a>
+          <a class="mobi-link" href="{{ route('client.contacts') }}">Contact Us</a>
+        </div>
+      </div>
       @yield('content')
     </div>
 
@@ -73,5 +98,34 @@
       </div>
     </footer> --}}
   @yield('footer-scripts')
+  <script>
+    /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
+    function expandOnMobile() {
+      var x = document.getElementById("mobileLinks");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+
+    assignActiveMStatus();
+
+function assignActiveMStatus() {
+  document.addEventListener("DOMContentLoaded", function () {
+    var links = document.querySelectorAll(".mobi-link");
+    var currentUrl = window.location.href;
+
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
+      if (link.href === currentUrl) {
+        link.classList.add("active-mlink");
+        document.getElementById('activeMobileLinkSpace').innerHTML = "<i class='fa fa-bars'></i> " + link.innerHTML;
+        break;
+      }
+    }
+  });
+}
+  </script>
 </body>
 </html>

@@ -8,7 +8,6 @@
         <img src="{{ asset('img/swimming1.jpg') }}" alt="Image 4">
         <div class="overlay"></div>
         <div class="text">
-            <h1>Conrad Resort</h1>
             <p>Experience our awesome services.</p>
             <button>Learn More</button>
         </div>

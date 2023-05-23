@@ -202,6 +202,11 @@ body {
   font-size: smaller;
 }
 
+.contact-tab h2 {
+  text-transform: uppercase;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .contact-menu {
   display: flex;
   justify-content: flex-end;
@@ -252,7 +257,7 @@ body {
 }
 
 .newnav {
-  width: 90vw;
+  width: 100%;
   margin: 2rem auto;
   overflow: hidden;
 }
@@ -303,6 +308,56 @@ body {
 
 .newnav ul li a.active:after {
   transform: scaleX(1);
+}
+
+/* Navigation for mobile */
+.mobilenav {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  display: none;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.mobilenav #mobileLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.mobilenav a {
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.mobilenav a.icon {
+  color: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.mobilenav a:hover {
+  background-color: #ddd;
+}
+
+/* Style the active link (or home/logo) */
+.active-mlink {
+  color: black;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#activeMobileLinkSpace {
+  padding: .5rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .contacts__tab {
@@ -426,16 +481,85 @@ body {
   display: table;
 }
 
+.feature-img {
+  height: 15rem;
+  width: 80%;
+}
+
 @media only screen and (max-width: 768px) {
 
+  body h3 {
+    font-size: 1.2rem;
+  }
+
+  body p {
+    font-size: .8rem;
+  }
+
+  .slider, .pagelanding {
+    height: 50vh;
+  }
+
   /* For mobile phones: */
+  .slider img, .pagelanding img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: inherit;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    z-index: 1;
+    font-size: x-small;
+  }
+
+  .text h1 {
+    font-size: 2rem;
+  }
+
+  .text p {
+    font-size: 1.3rem;
+  }
+
+  .text button {
+    display: none;
+  }
+
   [class*="col-"] {
     width: 100%;
   }
 
-  .blue-div {
+  .blue-div, .contact-tab ul {
     display: none;
   }
+
+  .newnav {
+    display: none;
+  }
+
+  .mobilenav {
+    margin-top: .5rem;
+    display: block;
+  }
+
+  #maincontent {
+    width: 100%;
+    padding: .5rem;
+  }
+
+  .feature-img {
+    height: 15rem;
+    width: 100%
+  }
+
 }
 
 .map {

@@ -11,6 +11,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\BarController;
 use App\Http\Controllers\Client\PageController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\RoomPageController;
@@ -19,6 +20,8 @@ use App\Http\Controllers\Client\FunAndFitnessPageController;
 use App\Http\Controllers\Client\OpenAirEventsPageController;
 use App\Http\Controllers\Client\RestaurantAndBarPageController;
 use App\Http\Controllers\Client\ConferenceFacilitiesPageController;
+use App\Http\Controllers\RestaurantController;
+use App\Models\ConferenceFacility;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,6 +130,42 @@ Route::group(['prefix' => 'services'], function(){
             Route::get('{room}/edit', 'edit')->name('rooms.edit');
             Route::put('{room}/edit', 'update');
             Route::delete('{room}/delete', 'destroy')->name('rooms.delete');
+        });
+    });
+
+    Route::group(['prefix' => 'bars'], function(){
+        Route::controller(BarController::class)->group(function(){
+            Route::get('data', 'index')->name('bars');
+            Route::get('create', 'create')->name('bars.create');
+            Route::post('create', 'store');
+            Route::get('{bar}/show', 'show')->name('bars.show');
+            Route::get('{bar}/edit', 'edit')->name('bars.edit');
+            Route::put('{bar}/edit', 'update');
+            Route::delete('{bar}/delete', 'destroy')->name('bars.delete');
+        });
+    });
+
+    Route::group(['prefix' => 'restaurant'], function(){
+        Route::controller(RestaurantController::class)->group(function(){
+            Route::get('data', 'index')->name('restaurants');
+            Route::get('create', 'create')->name('restaurants.create');
+            Route::post('create', 'store');
+            Route::get('{restaurant}/show', 'show')->name('restaurants.show');
+            Route::get('{restaurant}/edit', 'edit')->name('restaurants.edit');
+            Route::put('{restaurant}/edit', 'update');
+            Route::delete('{restaurant}/delete', 'destroy')->name('restaurants.delete');
+        });
+    });
+
+    Route::group(['prefix' => 'conference-facilities'], function(){
+        Route::controller(ConferenceFacility::class)->group(function(){
+            Route::get('data', 'index')->name('facilities');
+            Route::get('create', 'create')->name('facilities.create');
+            Route::post('create', 'store');
+            Route::get('{conferenceFacility}/show', 'show')->name('facilities.show');
+            Route::get('{conferenceFacility}/edit', 'edit')->name('facilities.edit');
+            Route::put('{conferenceFacility}/edit', 'update');
+            Route::delete('{conferenceFacility}/delete', 'destroy')->name('facilities.delete');
         });
     });
 });

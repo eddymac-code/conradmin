@@ -99,6 +99,24 @@ function assignActivestatus() {
   });
 }
 
+// assignActiveMStatus();
+
+// function assignActiveMStatus() {
+//   document.addEventListener("DOMContentLoaded", function () {
+//     var links = document.querySelectorAll(".mobi-link");
+//     var currentUrl = window.location.href;
+
+//     for (var i = 0; i < links.length; i++) {
+//       var link = links[i];
+//       if (link.href === currentUrl) {
+//         link.classList.add("active-mlink");
+//         document.getElementById('activeMobileLinkSpace').innerHTML = link;
+//         break;
+//       }
+//     }
+//   });
+// }
+
 function toggleContent() {
   var content = document.getElementById("content-box");
   var toggleButton = document.getElementById("toggleButton");

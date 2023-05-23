@@ -25,6 +25,11 @@
                 <div class="card-container">
                     <h5>{{ $room->name }}</h5>
                     <p>{{ $room->description ?? '' }}</p>
+                    <p>
+                        @foreach ($room->amenities as $amenity)
+                        <img style="width:20px" src="{{ asset('storage/images/rooms/amenities/'.$amenity->image) }}" title="{{ $amenity->name }}" alt="">
+                        @endforeach
+                    </p>
                     <p><button class="button">Check available rooms</button></p>
                 </div>
             </div>

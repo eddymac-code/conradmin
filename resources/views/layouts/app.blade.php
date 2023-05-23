@@ -45,8 +45,12 @@
                                 <i class="fa-solid fa-bell-concierge"></i> SERVICES
                             </a>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="">Bars and Lounge</a></li>
+                              @can('bars.access')
+                              <li><a class="dropdown-item" href="{{ route('bars') }}">Bars and Lounge</a></li>
+                              @endcan
+                              @can('restaurants.access')
                               <li><a class="dropdown-item" href="">Restaurant</a></li>
+                              @endcan
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="">Conference Facilities</a></li>
                               <li><a class="dropdown-item" href="{{ route('rooms') }}">Rooms</a></li>
