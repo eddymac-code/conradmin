@@ -44,7 +44,10 @@ class RolesAndPermissionsSeeder extends Seeder
 'roomtypes.access','roomtypes.view','roomtypes.create','roomtypes.update','roomtypes.delete','roomtypes.assign',
 'bars.access','bars.view','bars.create','bars.update','bars.delete',
 'restaurants.access','restaurants.view','restaurants.create','restaurants.update','restaurants.delete',
-'conferences.access','conferences.view','conferences.create','conferences.update','conferences.delete'];
+'conferences.access','conferences.view','conferences.create','conferences.update','conferences.delete',
+'pools.access','pools.view','pools.create','pools.update','pools.delete',
+'gyms.access','gyms.view','gyms.create','gyms.update','gyms.delete',
+'grounds.access','grounds.view','grounds.create','grounds.update','grounds.delete'];
         $permissions = collect($arrayOfPermissionNames)->map(function ($permission) {
             $descArray = explode('.', $permission);
             $description = ucfirst($descArray[1]) . " " . $descArray[0];

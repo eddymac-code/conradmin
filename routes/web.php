@@ -20,8 +20,11 @@ use App\Http\Controllers\Client\FunAndFitnessPageController;
 use App\Http\Controllers\Client\OpenAirEventsPageController;
 use App\Http\Controllers\Client\RestaurantAndBarPageController;
 use App\Http\Controllers\Client\ConferenceFacilitiesPageController;
+use App\Http\Controllers\ConferenceFacilityController;
+use App\Http\Controllers\GroundController;
+use App\Http\Controllers\GymController;
+use App\Http\Controllers\PoolController;
 use App\Http\Controllers\RestaurantController;
-use App\Models\ConferenceFacility;
 
 /*
 |--------------------------------------------------------------------------
@@ -158,7 +161,7 @@ Route::group(['prefix' => 'services'], function(){
     });
 
     Route::group(['prefix' => 'conference-facilities'], function(){
-        Route::controller(ConferenceFacility::class)->group(function(){
+        Route::controller(ConferenceFacilityController::class)->group(function(){
             Route::get('data', 'index')->name('facilities');
             Route::get('create', 'create')->name('facilities.create');
             Route::post('create', 'store');
@@ -166,6 +169,44 @@ Route::group(['prefix' => 'services'], function(){
             Route::get('{conferenceFacility}/edit', 'edit')->name('facilities.edit');
             Route::put('{conferenceFacility}/edit', 'update');
             Route::delete('{conferenceFacility}/delete', 'destroy')->name('facilities.delete');
+        });
+    });
+
+    Route::group(['prefix' => 'fun-fitness'], function(){
+        Route::group(['prefix' => 'pools'], function(){
+            Route::controller(PoolController::class)->group(function(){
+                Route::get('data', 'index')->name('pools');
+                Route::get('create', 'create')->name('pools.create');
+                Route::post('create', 'store');
+                Route::get('{pool}/show', 'show')->name('pools.show');
+                Route::get('{pool}/edit', 'edit')->name('pools.edit');
+                Route::put('{pool}/edit', 'update');
+                Route::delete('{pool}/delete', 'destroy')->name('pools.delete');
+            });
+        });
+
+        Route::group(['prefix' => 'gyms'], function(){
+            Route::controller(GymController::class)->group(function(){
+                Route::get('data', 'index')->name('gyms');
+                Route::get('create', 'create')->name('gyms.create');
+                Route::post('create', 'store');
+                Route::get('{gym}/show', 'show')->name('gyms.show');
+                Route::get('{gym}/edit', 'edit')->name('gyms.edit');
+                Route::put('{gym}/edit', 'update');
+                Route::delete('{gym}/delete', 'destroy')->name('gyms.delete');
+            });
+        });
+    });
+
+    Route::group(['prefix' => 'grounds'], function(){
+        Route::controller(GroundController::class)->group(function(){
+            Route::get('data', 'index')->name('grounds');
+            Route::get('create', 'create')->name('grounds.create');
+            Route::post('create', 'store');
+            Route::get('{ground}/show', 'show')->name('grounds.show');
+            Route::get('{ground}/edit', 'edit')->name('grounds.edit');
+            Route::put('{ground}/edit', 'update');
+            Route::delete('{ground}/delete', 'destroy')->name('grounds.delete');
         });
     });
 });

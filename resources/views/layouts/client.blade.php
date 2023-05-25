@@ -25,7 +25,7 @@
     </div>
     <nav class="navbar">
         <div class="navbar__logo">
-          <a href="#">
+          <a href="{{ route('client.home') }}">
             <img src="{{ asset('img/logo.png') }}" alt="Logo">
           </a>
         </div>

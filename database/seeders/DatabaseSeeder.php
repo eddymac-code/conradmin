@@ -29,7 +29,10 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             BarSeeder::class,
             RestaurantSeeder::class,
-            ConferenceFacilitySeeder::class
+            ConferenceFacilitySeeder::class,
+            PoolSeeder::class,
+            GymSeeder::class,
+            GroundSeeder::class
         ]);
     }
 }

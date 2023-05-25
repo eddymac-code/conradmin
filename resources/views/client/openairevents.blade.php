@@ -16,6 +16,22 @@
     </div>
     <span id="toggleButton" onclick="toggleContent()">Read More...</span>
     <hr>
+    @foreach ($grounds as $ground)
+    <div class="row">
+        <h4>{{ $ground->name }}</h4>
+        <div class="col-6">
+            <div>
+                <img class="rounded feature-img" src="{{ asset('storage/images/grounds/'.$ground->image) }}" alt="groundimg">
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <p>{{ $ground->about }}</p>
+                <p>Price: {{ \App\Models\Setting::where('setting_key', 'hotel_currency')->first()->setting_value }} {{ $ground->price }}</p>
+            </div>
+        </div>
+    </div> 
+    @endforeach
 @endsection
 
 @section('footer-scripts')

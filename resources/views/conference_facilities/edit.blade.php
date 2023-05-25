@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="my-4 p-2">
-            <h2> Create Facility</h2>
-            <p class="lead">Add a hotel conference facility here</p>
+            <h2>Update Facility</h2>
+            <p class="lead">Update facility: <span class="fw-bold text-primary">{{ $conferenceFacility->name }}</span></p>
         </div>
         @if (session('message'))
             <div class="p-2 my-2 rounded bg-success text-white text-center fw-bold">
@@ -81,7 +81,7 @@
                     </div>
                     @if($conferenceFacility->image)
                     <div class="mb-3">
-                        <img style="width:50px;height:50px" src="{{ asset('storage/images/conference_facilities/'.$conferenceFacilities->image) }}" alt="" class="rounded">
+                        <img style="width:50px;height:50px" src="{{ asset('storage/images/conference_facilities/'.$conferenceFacility->image) }}" alt="" class="rounded">
                     </div>
                     @endif
                     <button type="submit" class="btn btn-primary">Update</button>

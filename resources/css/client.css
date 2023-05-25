@@ -135,14 +135,14 @@ body {
 }
 
 .text button {
-  padding: 2rem 5rem;
+  padding: 1rem 3rem;
   border: 0.3rem solid;
   border-radius: 0;
   background-color: transparent;
   color: #c3c3c3;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: larger;
+  font-size: large;
   letter-spacing: 0.3rem;
 }
 
@@ -303,7 +303,7 @@ body {
 }
 
 .newnav ul li a.active {
-  font-weight: bolder;
+  color: red;
 }
 
 .newnav ul li a.active:after {
@@ -322,15 +322,18 @@ body {
 /* Hide the links inside the navigation menu (except for logo/home) */
 .mobilenav #mobileLinks {
   display: none;
+  border-bottom: 3px solid #012353;
+  margin-bottom: .5rem;
 }
 
 /* Style navigation menu links */
 .mobilenav a {
   color: black;
-  padding: 14px 16px;
+  padding: .5rem 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: .7rem;
   display: block;
+  border-bottom: 1px solid #012353;
 }
 
 /* Style the hamburger menu */
@@ -487,6 +490,17 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar__logo img {
+    max-width: 100%;
+    width: 70px;
+  }
 
   body h3 {
     font-size: 1.2rem;

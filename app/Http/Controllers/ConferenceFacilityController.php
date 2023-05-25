@@ -101,7 +101,7 @@ class ConferenceFacilityController extends Controller
      */
     public function edit(ConferenceFacility $conferenceFacility)
     {
-        if (Gate::denies('conferences.edit')) {
+        if (Gate::denies('conferences.update')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
 
@@ -115,7 +115,7 @@ class ConferenceFacilityController extends Controller
      */
     public function update(Request $request, ConferenceFacility $conferenceFacility)
     {
-        if (Gate::denies('conferences.edit')) {
+        if (Gate::denies('conferences.update')) {
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
 

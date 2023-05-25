@@ -20,7 +20,7 @@
         <h4>Available Room Types</h4>
         @foreach ($roomType as $room)
         <div class="col-4 card-row">
-            <div class="card rounded-2 card-column">
+            <div class="card card-column">
                 <img src="{{ asset('storage/images/rooms/types/'.$room->image) }}" alt="Room Type" style="height:30vh;width:100%;object-fit:cover">
                 <div class="card-container">
                     <h5>{{ $room->name }}</h5>
