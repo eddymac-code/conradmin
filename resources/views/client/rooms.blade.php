@@ -18,21 +18,26 @@
     <hr>
     <div class="row">
         <h4>Available Room Types</h4>
-        @foreach ($roomType as $room)
-        <div class="col-4 card-row">
-            <div class="card card-column">
-                <img src="{{ asset('storage/images/rooms/types/'.$room->image) }}" alt="Room Type" style="height:30vh;width:100%;object-fit:cover">
-                <div class="card-container">
-                    <h5>{{ $room->name }}</h5>
-                    <p>{{ $room->description ?? '' }}</p>
+        @foreach ($roomType as $roomType)
+        <div class="col-md-4 d-flex">
+            <div class="card">
+                @if($roomType->image)
+                <img src="{{ asset('storage/images/rooms/types/'.$roomType->image) }}" style="height:200px;object-fit:cover" class="card-img-top" alt="...">
+                @endif
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{ $roomType->name }}</h5>
+                  <p class="card-text">{{ $roomType->description ?? '' }}</p>
+                  <div class="mb-2">
+                    <p class="card-text">Amenities</p>
                     <p>
-                        @foreach ($room->amenities as $amenity)
-                        <img style="width:20px" src="{{ asset('storage/images/rooms/amenities/'.$amenity->image) }}" title="{{ $amenity->name }}" alt="">
-                        @endforeach
+                    @foreach ($roomType->amenities as $amenity)
+                        <img style="width:20px" src="{{ asset('storage/images/rooms/amenities/'.$amenity->image) }}" title="{{ $amenity->name }}" data-bs-toggle="popover" data-bs-content="" data-bs-trigger="hover" alt="">
+                    @endforeach
                     </p>
-                    <p><button class="button">Check available rooms</button></p>
+                  </div>
+                  <a href="{{ route('client.rooms.available', $roomType) }}" class="btn btn-primary mt-auto">Check Availability</a>
                 </div>
-            </div>
+              </div>
         </div>
         @endforeach
     </div>
@@ -52,5 +57,32 @@
                 toggleButton.innerHTML = "Read Less";
             }
         }
+
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" slideactive", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " slideactive";
+}
     </script>
 @endsection

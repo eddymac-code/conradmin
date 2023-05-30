@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
 
 @import "@fortawesome/fontawesome-free/css/all.css";
 
@@ -10,6 +11,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+
 }
 
 html {
@@ -17,10 +19,12 @@ html {
 }
 
 body {
-  /* font-family: 'Roboto Condensed', sans-serif; */
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
   /* font-weight:bold; */
+  /* font-family: 'Hammersmith One', sans-serif; */
   background-color: #fff;
+  color: #555;
 }
 
 .navbar {
@@ -243,13 +247,13 @@ body {
   flex-direction: column;
 }
 
-.blue-div {
+.footer-links {
   height: 80%;
   background-color: #012353;
   color: #f3f3f3;
 }
 
-.remaining-div {
+.footer-info {
   height: 20%;
   background-color: #f3f3f3;
   color: #012353;
@@ -593,4 +597,89 @@ body {
 .social-links a {
   padding: .5rem;
   color: #012353;
+}
+
+/* Experimental checkin-checkout form */
+.roomform {
+  padding: 3rem auto;
+}
+
+/* .roomform input {
+  border: 0;
+  padding: 1rem;
+  border-bottom: 3px solid #555;
+}
+
+.roomform input:focus {
+  outline: none;
+}*/
+
+.roomform button {
+  display: inline;
+  height: 3rem;
+  padding: .5rem 1rem;
+  align-self: center;
+}
+
+.p-over {
+  position: relative;
+  display: inline-block;
+}
+
+.p-over-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  width: 200px;
+  top: 6rem;
+  left: 1rem;
+  display: none;
+}
+
+.p-over-content:before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent #ddd transparent;
+}
+
+.p-over.active .p-over-content {
+  display: block;
+  padding: 1rem;
+}
+
+.p-over-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: .5rem;
+}
+
+.p-over-label {
+  margin-right: 10px;
+}
+
+.p-over-value {
+  display: flex;
+  align-items: center;
+}
+
+.p-over-value span {
+  margin: 0 5px;
+}
+
+.p-over-value button {
+  border-radius: 50%;
+  border: none;
+  background-color: #f1f1f1;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  padding: .5rem;
 }

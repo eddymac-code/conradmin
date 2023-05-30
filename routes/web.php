@@ -45,7 +45,12 @@ Route::get('/clear-cache', function () {
 });
 
 Route::get('/', [HomePageController::class, 'index'])->name('client.home');
-Route::get('/rooms', [RoomPageController::class, 'index'])->name('client.rooms');
+Route::group(['prefix' => 'rooms'], function(){
+    Route::controller(RoomPageController::class)->group(function(){
+        Route::get('/', 'index')->name('client.rooms');
+        Route::get('{roomType:name}/check-availability', 'show')->name('client.rooms.available');
+    });
+});
 Route::get('/restaurants-bars', [RestaurantAndBarPageController::class, 'index'])->name('client.restaurantbar');
 Route::get('/conference-facilities', [ConferenceFacilitiesPageController::class, 'index'])->name('client.conferences');
 Route::get('/fun-fitness', [FunAndFitnessPageController::class, 'index'])->name('client.funfitness');
