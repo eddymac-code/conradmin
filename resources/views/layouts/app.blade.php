@@ -94,6 +94,9 @@
                                 @can('pages.access')
                                     <li><a class="dropdown-item" href="{{ route('pages') }}">Page Settings</a></li>
                                 @endcan
+                                @can('gateway-settings.access')
+                                    <li><a class="dropdown-item" href="{{ route('gateway.settings') }}">Gateway Settings</a></li>
+                                @endcan
                                 </ul>
                             </li>
                             @endcan

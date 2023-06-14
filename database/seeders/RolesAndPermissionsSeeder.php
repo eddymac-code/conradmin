@@ -39,9 +39,10 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $arrayOfPermissionNames = ['users.access','users.view','users.create','users.update','users.delete',
     'roles.view', 'roles.create','roles.update','roles.delete','permissions.view','permissions.create','permissions.update',
-'permissions.delete','settings.access','settings.update','pages.access','pages.view','pages.create','pages.update','pages.delete',
+'permissions.delete','settings.access','settings.update','gateway-settings.access','pages.access','pages.view','pages.create','pages.update','pages.delete',
 'services.access','rooms.access','rooms.view','rooms.create','rooms.update','rooms.delete',
 'roomtypes.access','roomtypes.view','roomtypes.create','roomtypes.update','roomtypes.delete','roomtypes.assign',
+'reservations.access','reservations.view','reservations.create','reservations.update','reservations.delete',
 'bars.access','bars.view','bars.create','bars.update','bars.delete',
 'restaurants.access','restaurants.view','restaurants.create','restaurants.update','restaurants.delete',
 'conferences.access','conferences.view','conferences.create','conferences.update','conferences.delete',

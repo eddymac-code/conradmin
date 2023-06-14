@@ -30,7 +30,9 @@
                         <img style="width:20px" src="{{ asset('storage/images/rooms/amenities/'.$amenity->image) }}" title="{{ $amenity->name }}" alt="">
                     @endforeach
                   </div>
-                  <a href="#" class="btn btn-primary">Reserve</a>
+                  @if ($room->reservations()->whereNotIn('status', [0,3])->count() < 1)
+                  <a href="{{ route('rooms.reservations.create', $room) }}" class="btn btn-primary">Reserve</a>
+                  @endif
                 </div>
               </div>
         </div>

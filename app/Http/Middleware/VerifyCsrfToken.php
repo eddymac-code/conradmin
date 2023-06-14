@@ -12,6 +12,13 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'get-token',
+        'register-urls',
+        'simulate',
+        'stkpush',
+        'simulateb2c',
+        'check-status',
+        'reversal'
+
     ];
 }

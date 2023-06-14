@@ -21,6 +21,8 @@ class RoomSeeder extends Seeder
                     'number' => $i,
                     'name' => $name,
                     'description' => 'Standard Room for value',
+                    'adults' => 2,
+                    'children' => 0,
                     'price' => $price,
                     'image' => 'room1.jpg'
                 ]);
@@ -35,6 +37,8 @@ class RoomSeeder extends Seeder
                     'number' => $i,
                     'name' => $name,
                     'description' => 'Deluxe Room (Floor 1)',
+                    'adults' => 2,
+                    'children' => 1,
                     'price' => $price,
                     'image' => 'room2.jpg'
                 ]);
@@ -49,6 +53,8 @@ class RoomSeeder extends Seeder
                     'number' => $i,
                     'name' => $name,
                     'description' => 'Deluxe Room (Floor 2)',
+                    'adults' => 2,
+                    'children' => 2,
                     'price' => $price,
                     'image' => 'room3.jpg'
                 ]);
@@ -63,6 +69,8 @@ class RoomSeeder extends Seeder
                     'number' => $i,
                     'name' => $name,
                     'description' => 'Executive Room for a premium experience',
+                    'adults' => 2,
+                    'children' => 2,
                     'price' => $price,
                     'image' => 'room4.jpg'
                 ]);

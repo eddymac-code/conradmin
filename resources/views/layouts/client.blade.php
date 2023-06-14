@@ -152,10 +152,15 @@ function assignActiveMStatus() {
   document.addEventListener("DOMContentLoaded", function () {
     var links = document.querySelectorAll(".mobi-link");
     var currentUrl = window.location.href;
+    var currentIdentifier = currentUrl.split('/')[3];
+
+    // console.log(currentIdentifier);
 
     for (var i = 0; i < links.length; i++) {
       var link = links[i];
-      if (link.href === currentUrl) {
+      var linkIdentifier = link.href.split('/')[3];
+      // console.log(linkIdentifier);
+      if (linkIdentifier === currentIdentifier) {
         link.classList.add("active-mlink");
         document.getElementById('activeMobileLinkSpace').innerHTML = "<i class='fa fa-bars'></i> " + link.innerHTML;
         break;
@@ -174,16 +179,16 @@ function assignActiveMStatus() {
       inputElement.stepDown();
     }
 
-    window.onscroll = function() {
-      var stickyDiv = document.querySelector('.toStick');
-      var distanceFromTop = stickyDiv.offsetTop;
+    // window.onscroll = function() {
+    //   var stickyDiv = document.querySelector('.toStick');
+    //   var distanceFromTop = stickyDiv.offsetTop;
       
-      if (window.pageYOffset > distanceFromTop) {
-        stickyDiv.classList.add("sticky-active");
-      } else {
-        stickyDiv.classList.remove("sticky-active");
-      }
-    };
+    //   if (window.pageYOffset > distanceFromTop) {
+    //     stickyDiv.classList.add("sticky-active");
+    //   } else {
+    //     stickyDiv.classList.remove("sticky-active");
+    //   }
+    // };
   </script>
 </body>
 </html>

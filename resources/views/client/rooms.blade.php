@@ -35,11 +35,14 @@
                     @endforeach
                     </p>
                   </div>
-                  <a href="{{ route('client.rooms.available', $roomType) }}" class="btn btn-primary mt-auto">Check Availability</a>
                 </div>
               </div>
         </div>
         @endforeach
+        
+        <div class="my-5 text-center">
+            <a href="{{ route('client.rooms.available') }}" class="btn btn-primary mt-auto">Check Availability</a>
+          </div>
     </div>
 @endsection
 
@@ -58,31 +61,14 @@
             }
         }
 
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-        showSlides(slideIndex += n);
+        scrollToContent();
+        function scrollToContent() {
+            window.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                var section = document.getElementById('maincontent');
+                section.scrollIntoView();
+                }, 3000);
+            });
         }
-
-        function currentSlide(n) {
-        showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}    
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" slideactive", "");
-        }
-        slides[slideIndex-1].style.display = "block";  
-        dots[slideIndex-1].className += " slideactive";
-}
     </script>
 @endsection

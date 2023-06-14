@@ -2,29 +2,31 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BarController;
+use App\Http\Controllers\GymController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\PoolController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GroundController;
 use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\Admin\ImageController;
-use App\Http\Controllers\BarController;
 use App\Http\Controllers\Client\PageController;
 use App\Http\Controllers\Client\HomePageController;
 use App\Http\Controllers\Client\RoomPageController;
+use App\Http\Controllers\RoomReservationController;
+use App\Http\Controllers\ConferenceFacilityController;
 use App\Http\Controllers\Client\ContactsPageController;
+use App\Http\Controllers\Payments\Mpesa\MpesaController;
 use App\Http\Controllers\Client\FunAndFitnessPageController;
 use App\Http\Controllers\Client\OpenAirEventsPageController;
 use App\Http\Controllers\Client\RestaurantAndBarPageController;
 use App\Http\Controllers\Client\ConferenceFacilitiesPageController;
-use App\Http\Controllers\ConferenceFacilityController;
-use App\Http\Controllers\GroundController;
-use App\Http\Controllers\GymController;
-use App\Http\Controllers\PoolController;
-use App\Http\Controllers\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +50,7 @@ Route::get('/', [HomePageController::class, 'index'])->name('client.home');
 Route::group(['prefix' => 'rooms'], function(){
     Route::controller(RoomPageController::class)->group(function(){
         Route::get('/', 'index')->name('client.rooms');
-        Route::get('{roomType:name}/check-availability', 'show')->name('client.rooms.available');
+        Route::any('check-availability', 'show')->name('client.rooms.available');
     });
 });
 Route::get('/restaurants-bars', [RestaurantAndBarPageController::class, 'index'])->name('client.restaurantbar');
@@ -129,6 +131,21 @@ Route::group(['prefix' => 'services'], function(){
                 });
             });
         });
+        
+        Route::group(['prefix' => 'reservations'], function(){
+            Route::controller(RoomReservationController::class)->group(function(){
+                Route::get('data', 'index')->name('rooms.reservations');
+                Route::get('{room}/create', 'create')->name('rooms.reservations.create');
+                Route::post('{room}/create', 'store');
+                Route::get('{roomReservation}/show', 'show')->name('rooms.reservations.show');
+                Route::get('{roomReservation}/edit', 'edit')->name('rooms.reservations.edit');
+                Route::put('{roomReservation}/edit', 'update');
+                Route::delete('{roomReservation}/delete', 'destroy')->name('rooms.reservations.delete');
+                Route::put('{roomReservation}/cancel', 'cancel')->name('rooms.reservations.cancel');
+                Route::put('{roomReservation}/guarantee', 'guarantee')->name('rooms.reservations.guarantee');
+                Route::put('{roomReservation}/revert', 'unguarantee')->name('rooms.reservations.unguarantee');
+            });
+        });
 
         Route::controller(RoomController::class)->group(function(){
             Route::get('data', 'index')->name('rooms');
@@ -139,6 +156,7 @@ Route::group(['prefix' => 'services'], function(){
             Route::put('{room}/edit', 'update');
             Route::delete('{room}/delete', 'destroy')->name('rooms.delete');
         });
+
     });
 
     Route::group(['prefix' => 'bars'], function(){
@@ -220,8 +238,33 @@ Route::group(['prefix' => 'setting'], function(){
     Route::controller(SettingController::class)->group(function(){
         Route::get('data', 'index')->name('settings');
         Route::put('edit', 'update')->name('settings.edit');
+        Route::get('gateway/data', 'gateWaySet')->name('gateway.settings');
     });
 });
+
+Route::post('get-token', [MpesaController::class, 'getAccessToken']);
+Route::post('register-urls', [MpesaController::class, 'registerURLS']);
+Route::post('simulate', [MpesaController::class, 'simulateTransaction']);
+Route::post('stkpush', [MpesaController::class, 'stkPush']);
+Route::post('simulateb2c', [MpesaController::class, 'b2cRequest']);
+Route::post('check-status', [MpesaController::class, 'transactionStatus']);
+Route::post('reversal', [MpesaController::class, 'reverseTransaction']);
+
+Route::get('stk', function(){
+    return view('setting.gateway.stk');
+})->name('stk');
+
+Route::get('b2c', function(){
+    return view('setting.gateway.b2c');
+})->name('b2c');
+
+Route::get('transaction-status', function(){
+    return view('setting.gateway.status');
+})->name('trans-stat');
+
+Route::get('reverse', function(){
+    return view('setting.gateway.reverse');
+})->name('reverse');
 
 Route::group(['prefix' => 'pages'], function(){
     Route::controller(PageController::class)->group(function(){

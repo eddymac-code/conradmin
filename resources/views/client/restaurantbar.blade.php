@@ -63,5 +63,15 @@
                 toggleButton.innerHTML = "Read Less";
             }
         }
+
+        scrollToContent();
+        function scrollToContent() {
+            window.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                var section = document.getElementById('maincontent');
+                section.scrollIntoView();
+                }, 3000);
+            });
+        }
     </script>
 @endsection

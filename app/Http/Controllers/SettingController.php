@@ -55,4 +55,9 @@ class SettingController extends Controller
 
         return redirect()->back()->with('message', 'Settings Updated Successfully!');
     }
+
+    public function gateWaySet()
+    {
+        return view('setting.gateway.mpesahome');
+    }
 }

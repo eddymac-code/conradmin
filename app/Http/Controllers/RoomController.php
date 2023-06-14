@@ -22,7 +22,7 @@ class RoomController extends Controller
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
 
-        $rooms = Room::paginate(10);
+        $rooms = Room::where('status', 0)->paginate(10);
 
         return view('room.data', [
             'rooms' => $rooms
@@ -92,6 +92,7 @@ class RoomController extends Controller
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
 
+        // dd($room->reservations->count());
         return view('room.show', [
             'room' => $room
         ]);

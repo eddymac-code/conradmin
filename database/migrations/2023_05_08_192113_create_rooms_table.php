@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('number');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->integer('adults');
+            $table->integer('children');
             $table->decimal('price', 10, 2);
             $table->string('image');
             $table->integer('status')->default(0);
