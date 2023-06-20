@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('check_out');
             $table->time('time_in');
             $table->time('time_out');
-            $table->tinyText('special_requests')->nullable();
+            $table->json('special_requests')->nullable();
             $table->integer('status')->default(0);
             $table->decimal('total_cost', 10, 2);
             $table->timestamps();

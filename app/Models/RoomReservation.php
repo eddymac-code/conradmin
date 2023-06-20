@@ -27,6 +27,10 @@ class RoomReservation extends Model
         'total_cost',
     ];
 
+    protected $casts = [
+        'special_requests' => 'array',
+    ];
+
     public function room()
     {
         return $this->belongsTo(Room::class);

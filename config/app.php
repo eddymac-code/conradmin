@@ -197,6 +197,10 @@ return [
             'MPESA_TEST_URL',
             'MPESA_PASSKEY',
             'MPESA_B2C_PASSWORD',
+            'PESAPAL_ENV',
+            'PESAPAL_TEST_URL',
+            'PESAPAL_ENV_CONSUMER_KEY',
+            'PESAPAL_CONSUMER_SECRET',
         ]
     ]
 

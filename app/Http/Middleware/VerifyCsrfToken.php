@@ -18,7 +18,9 @@ class VerifyCsrfToken extends Middleware
         'stkpush',
         'simulateb2c',
         'check-status',
-        'reversal'
-
+        'reversal',
+        'pal/authenticate',
+        'pal/register-urls',
+        'pal/submit-order',
     ];
 }

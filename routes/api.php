@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Payments\Mpesa\MpesaResponsesController;
+use App\Http\Controllers\Payments\Pesapal\PesapalResponsesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,10 @@ use App\Http\Controllers\Payments\Mpesa\MpesaResponsesController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// Pesapal
+Route::post('/conrad/palnotify', [PesapalResponsesController::class, 'notification']);
 
+// Mpesa
 Route::post('conrad/mobivalide', [MpesaResponsesController::class, 'validation']);
 Route::post('conrad/mobiconf', [MpesaResponsesController::class, 'confirmation']);
 Route::post('conrad/stkpush', [MpesaResponsesController::class, 'stkPush']);

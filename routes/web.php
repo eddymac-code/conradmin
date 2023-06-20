@@ -27,6 +27,8 @@ use App\Http\Controllers\Client\FunAndFitnessPageController;
 use App\Http\Controllers\Client\OpenAirEventsPageController;
 use App\Http\Controllers\Client\RestaurantAndBarPageController;
 use App\Http\Controllers\Client\ConferenceFacilitiesPageController;
+use App\Http\Controllers\Payments\Pesapal\PesapalController;
+use App\Http\Controllers\RoomExtraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,9 @@ Route::get('/conference-facilities', [ConferenceFacilitiesPageController::class,
 Route::get('/fun-fitness', [FunAndFitnessPageController::class, 'index'])->name('client.funfitness');
 Route::get('open-air-events', [OpenAirEventsPageController::class, 'index'])->name('client.openairevents');
 Route::get('/contacts', [ContactsPageController::class, 'index'])->name('client.contacts');
+Route::get('/order_response', function(){
+    return view('client.reservation_response');
+})->name('order.response');
 
 Auth::routes();
 
@@ -137,6 +142,8 @@ Route::group(['prefix' => 'services'], function(){
                 Route::get('data', 'index')->name('rooms.reservations');
                 Route::get('{room}/create', 'create')->name('rooms.reservations.create');
                 Route::post('{room}/create', 'store');
+                Route::get('{room}/payment/{roomReservation}', 'paymentIndex')->name('rooms.reservations.payment');
+                Route::post('{room}/payment/{roomReservation}', 'paymentStore');
                 Route::get('{roomReservation}/show', 'show')->name('rooms.reservations.show');
                 Route::get('{roomReservation}/edit', 'edit')->name('rooms.reservations.edit');
                 Route::put('{roomReservation}/edit', 'update');
@@ -144,6 +151,18 @@ Route::group(['prefix' => 'services'], function(){
                 Route::put('{roomReservation}/cancel', 'cancel')->name('rooms.reservations.cancel');
                 Route::put('{roomReservation}/guarantee', 'guarantee')->name('rooms.reservations.guarantee');
                 Route::put('{roomReservation}/revert', 'unguarantee')->name('rooms.reservations.unguarantee');
+            });
+        });
+
+        Route::group(['prefix' => 'extras'], function(){
+            Route::controller(RoomExtraController::class)->group(function(){
+                Route::get('data', 'index')->name('rooms.extras');
+                Route::get('create', 'create')->name('rooms.extras.create');
+                Route::post('create', 'store');
+                Route::get('{roomExtra}/show', 'show')->name('rooms.extras.show');
+                Route::get('{roomExtra}/edit', 'edit')->name('rooms.extras.edit');
+                Route::put('{roomExtra}/edit', 'update');
+                Route::delete('{roomExtra}/delete', 'destroy')->name('rooms.extras.delete');
             });
         });
 
@@ -242,6 +261,18 @@ Route::group(['prefix' => 'setting'], function(){
     });
 });
 
+// Pesapal
+Route::group(['prefix' => 'pal'], function(){
+    Route::controller(PesapalController::class)->group(function(){
+        Route::post('authenticate', 'getToken');
+        Route::post('register-urls', 'registerURLS');
+        Route::get('registered-ipns', 'getRegisteredIPNS')->name('registered.ipns');
+        Route::post('submit-order', 'submitOrder');
+        Route::get('transaction-status', 'getTransactionStatus')->name('pal.transaction.status');
+    });
+});
+
+// Mpesa
 Route::post('get-token', [MpesaController::class, 'getAccessToken']);
 Route::post('register-urls', [MpesaController::class, 'registerURLS']);
 Route::post('simulate', [MpesaController::class, 'simulateTransaction']);

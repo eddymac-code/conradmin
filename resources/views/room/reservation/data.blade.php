@@ -52,7 +52,12 @@
                                         @if($reservation->status === 3)
                                             <span class="badge bg-danger">CANCELLED</span>
                                         @else
-                                            <span class="badge bg-success">GUARANTEED</span>
+                                            @if ($reservation->status === 4)
+                                                <span class="badge bg-success">SETTLED</span>
+                                            @else
+                                                <span class="badge bg-primary">GUARANTEED</span> 
+                                            @endif
+                                            
                                         @endif
                                     @endif
                                 </td>

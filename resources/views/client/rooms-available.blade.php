@@ -3,44 +3,6 @@
 @section('content')
     <div class="p-2">
         <h3>{{ __('Please input available dates and number of people') }}</h3>
-        {{-- <form action="" method="post">
-            @csrf
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="checkin" class="form-label">{{ __('Check In') }}</label>
-                            <input type="datetime-local" class="form-control" name="checkin">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="checkout" class="form-label">{{ __('Check Out') }}</label>
-                            <input type="datetime-local" class="form-control" name="checkout">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label class="form-label" for="adults">Adults</label>
-                            <div class="input-group">
-                                <span class="input-group-text" onclick="decrement('adults')">-</span>
-                                <input type="number" class="form-control" id="adults" min="1" value="1" readonly>
-                                <span class="input-group-text" onclick="increment('adults')">+</span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="kids">Kids</label>
-                            <div class="input-group">
-                                <span class="input-group-text" onclick="decrement('kids')">-</span>
-                                <input type="number" class="form-control" id="kids" min="0" value="0" readonly>
-                                <span class="input-group-text" onclick="increment('kids')">+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form> --}}
         @if (session('message'))
             <div class="p-2 my-2 rounded bg-success text-white text-center fw-bold">
                 {{ session('message') }}

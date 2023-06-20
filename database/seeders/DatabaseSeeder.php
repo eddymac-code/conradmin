@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             AmenitySeeder::class,
             AmenityRoomTypeSeeder::class,
             RoomSeeder::class,
+            RoomExtraSeeder::class,
             PageSeeder::class,
             BarSeeder::class,
             RestaurantSeeder::class,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\Country;
+use App\Models\RoomExtra;
 use Illuminate\Http\Request;
 use App\Models\RoomReservation;
 use Illuminate\Support\Facades\Gate;
@@ -39,10 +40,12 @@ class RoomReservationController extends Controller
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
         $countries = Country::all();
+        $roomExtras = RoomExtra::all();
 
         return view('room.reservation.create', [
             'room' => $room,
             'countries' => $countries,
+            'roomExtras' => $roomExtras,
         ]);
     }
 
@@ -66,28 +69,82 @@ class RoomReservationController extends Controller
 
         $refNo = $this->generateReferenceNumber($room->number);
 
-        $reservation = new RoomReservation();
-        $reservation->reference_number = $refNo;
-        $reservation->source = 'admin';
-        $reservation->guest_name = $request->guest;
-        $reservation->guest_id = $request->identity;
-        $reservation->room_id = $room->id;
-        $reservation->check_in = $request->checkin;
-        $reservation->check_out = $request->checkout;
-        $reservation->time_in = $request->time_in;
-        $reservation->time_out = $request->time_out;
-        $reservation->special_requests = $request->special_requests;
-        $reservation->status = $request->has('pay_info') ? 1 : 0;
-        $reservation->total_cost = $room->price; // add other costs if required
-        $reservation->save();
+        $roomReservation = new RoomReservation();
+        $roomReservation->reference_number = $refNo;
+        $roomReservation->source = 'admin';
+        $roomReservation->guest_name = $request->guest;
+        $roomReservation->guest_id = $request->identity;
+        $roomReservation->country = $request->country;
+        $roomReservation->phone = $request->phone;
+        $roomReservation->room_id = $room->id;
+        $roomReservation->check_in = $request->checkin;
+        $roomReservation->check_out = $request->checkout;
+        $roomReservation->time_in = $request->time_in;
+        $roomReservation->time_out = $request->time_out;
+        $roomReservation->special_requests = $request->special_requests;
+        $roomReservation->status = 0;
+        $roomReservation->total_cost = $request->total_price; // add other costs if required
+        $roomReservation->save();
 
-        if ($reservation->status == 1) {
-            $room->update(['status' => 1]);
+        // dd($roomReservation);
+
+        // if ($reservation->status == 1) {
+        //     $room->update(['status' => 1]);
+        // } else {
+        //     $room->update(['status' => 0]);
+        // }
+
+        if ($request->has('pay_info')) {
+            return redirect()->route('rooms.reservations.payment', [$room, $roomReservation])->with('message', 'Reservation saved successfully');
         } else {
-            $room->update(['status' => 0]);
+            return redirect()->route('rooms.reservations')->with('message', 'Reservation saved successfully');
         }
+    }
 
-        return redirect()->route('rooms.reservations')->with('message', 'Reservation saved successfully');
+    /**
+     * Handle payment for the reservation
+     */
+    public function paymentIndex(Room $room, RoomReservation $roomReservation)
+    {
+        return view('room.reservation.pay_index', [
+            'room' => $room,
+            'roomReservation' => $roomReservation
+        ]);
+    }
+
+    /**
+     * Store payment for the reservation
+     */
+    public function paymentStore(Request $request, Room $room, RoomReservation $roomReservation)
+    {
+        // dd($request->request);
+        if ($request->method == "mobile" && !empty($request->phone_number)) {
+            // Send STK or prompt caller to send money via till/paybill
+            $roomReservation->update(['status' => 1]);
+            $room->update(['status' => 1]);
+            $reservations = $roomReservation->room->reservations()->where('status', 0)->get();
+            foreach ($reservations as $reservation) {
+                $reservation->update(['status' => 3]);
+                // Send Notification to client for cancellation.
+            }
+
+            return redirect()->route('rooms.reservations')->with('message', 'Reservation guaranteed and room booked successfully');
+        
+        } elseif($request->method == "cash" && $request->has('cash_confirm')) {
+            // Send message
+            $roomReservation->update(['status' => 1]);
+            $room->update(['status' => 1]);
+            $reservations = $roomReservation->room->reservations()->where('status', 0)->get();
+            foreach ($reservations as $reservation) {
+                $reservation->update(['status' => 3]);
+                // Send Notification to client for cancellation.
+            }
+
+            return redirect()->route('rooms.reservations')->with('message', 'Reservation guaranteed and room booked successfully');
+        } else {
+            return back()->with('error', 'Please make sure to fill all inputs');
+        }
+        
     }
 
     /**
@@ -113,12 +170,14 @@ class RoomReservationController extends Controller
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
         $countries = Country::all();
+        $roomExtras = RoomExtra::all();
 
         $room = $roomReservation->room;
 
         return view('room.reservation.edit', [
             'room' => $room,
             'countries' => $countries,
+            'roomExtras' => $roomExtras,
             'roomReservation' => $roomReservation
         ]);
     }
@@ -144,14 +203,16 @@ class RoomReservationController extends Controller
         $roomReservation->source = 'admin';
         $roomReservation->guest_name = $request->guest;
         $roomReservation->guest_id = $request->identity;
+        $roomReservation->country = $request->country;
+        $roomReservation->phone = $request->phone;
         $roomReservation->room_id = $roomReservation->room->id;
         $roomReservation->check_in = $request->checkin;
         $roomReservation->check_out = $request->checkout;
         $roomReservation->time_in = $request->time_in;
         $roomReservation->time_out = $request->time_out;
         $roomReservation->special_requests = $request->special_requests;
-        $roomReservation->status = $request->has('pay_info') ? 1 : 0;
-        $roomReservation->total_cost = $roomReservation->room->price; // add other costs if required
+        $roomReservation->status = $roomReservation->status;
+        $roomReservation->total_cost = $request->total_price; // add other costs if required
         $roomReservation->save();
 
         if ($roomReservation->status == 1) {

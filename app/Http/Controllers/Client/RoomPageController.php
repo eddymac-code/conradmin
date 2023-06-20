@@ -58,6 +58,7 @@ class RoomPageController extends Controller
                 // Use the extracted values in your search function or further processing
                 $rooms = Room::where('room_type', $roomtype)->where('adults', '>=', $adults)
                         ->where('children', '>=', $children)
+                        ->where('status', 0)
                         ->get();
 
                 return view('client.rooms-available', [
