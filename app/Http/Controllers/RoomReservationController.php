@@ -58,6 +58,8 @@ class RoomReservationController extends Controller
             return redirect()->route('home')->with('message', 'Permission denied! Contact System Administrator.');
         }
 
+        dd($request);
+
         $this->validate($request, [
             'guest' => 'required',
             'identity' => 'required',

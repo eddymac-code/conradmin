@@ -127,6 +127,28 @@
                     <div class="clearfix"></div>
                     @endif
                 </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="timein" class="form-label">Time In</label>
+                            <input type="text" name="time_in" id="timein" value="{{ \App\Models\Setting::where('setting_key', 'time_in')->first()->setting_value }}"
+                            class="form-control @error('time_in') border border-danger @enderror">
+        
+                            @error('time_in')
+                                <div class="text-danger fs-6 mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
+                            <label for="timeout" class="form-label">Time Out</label>
+                            <input type="text" name="time_out" id="timeout" value="{{ \App\Models\Setting::where('setting_key', 'time_out')->first()->setting_value }}"
+                            class="form-control @error('time_out') border border-danger @enderror">
+        
+                            @error('time_out')
+                                <div class="text-danger fs-6 mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
             
             <button type="submit" class="mb-3 btn btn-primary float-end">Update</button>
             </form>

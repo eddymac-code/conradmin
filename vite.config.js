@@ -6,9 +6,17 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                // 'resources/sass/app.scss',
+                // 'resources/js/app.js',
+                // 'resources/js/client.js',
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/js/bootstrap.js',
                 'resources/js/client.js',
+                'resources/css/app.css',
+                'resources/css/client.css',
+                'resources/css/searchform.css',
+                'resources/js/searchform.js',
             ],
             refresh: true,
         }),

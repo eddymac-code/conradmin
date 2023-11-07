@@ -1,14 +1,14 @@
 @extends('layouts.client')
 
 @section('landing')
-    <div class="slider">
+    <div class="slider mb-3">
         <img src="{{ asset('img/room1.jpg') }}" alt="Image 1">
         <img src="{{ asset('img/restaurant1.jpg') }}" alt="Image 2">
         <img src="{{ asset('img/office1.jpg') }}" alt="Image 3">
         <img src="{{ asset('img/swimming1.jpg') }}" alt="Image 4">
         <div class="overlay"></div>
         <div class="text">
-            <p>Experience our awesome services.</p>
+            <p>Upscale experience for business travelers and holidaymakers</p>
         </div>
     </div>
     {{-- <div class="buttons">
@@ -35,7 +35,7 @@
             <div class="col-md-4 d-flex">
                 <div class="card">
                     @if($roomType->image)
-                    <img src="{{ asset('storage/images/rooms/types/'.$roomType->image) }}" style="height:200px;object-fit:cover" class="card-img-top" alt="...">
+                    <img src="{{ asset('storage/images/rooms/types/'.$roomType->image) }}" style="height:200px;object-fit:cover" class="card-img-top img-fluid" alt="...">
                     @endif
                     <div class="card-body d-flex flex-column align-center">
                     <h5 class="card-title">{{ $roomType->name }}</h5>
@@ -66,7 +66,7 @@
                     $hall = \App\Models\ConferenceFacility::where('id', 1)->first();
                 @endphp
             <div class="col-md-6">
-                <img style="width:30rem" src="{{ asset('storage/images/conference_facilities/'. $hall->image) }}" alt="{{ $hall->name}} {{  __('Image') }}">
+                <img class="img-fluid" src="{{ asset('storage/images/conference_facilities/'. $hall->image) }}" alt="{{ $hall->name}} {{  __('Image') }}">
             </div>
             <div class="col-md-6">
                 <p class="lead">
@@ -88,7 +88,7 @@
                     $hall = \App\Models\ConferenceFacility::first();
                 @endphp
             <div class="col-md-6">
-                <img style="width:30rem" src="{{ asset('storage/images/conference_facilities/'. $hall->image) }}" alt="{{ $hall->name}} {{  __('Image') }}">
+                <img class="img-fluid" src="{{ asset('storage/images/conference_facilities/'. $hall->image) }}" alt="{{ $hall->name}} {{  __('Image') }}">
             </div>
             <div class="col-md-6">
                 <p class="lead">
@@ -110,7 +110,7 @@
                     $gym = \App\Models\Gym::first();
                 @endphp
             <div class="col-md-6">
-                <img style="width:30rem" src="{{ asset('storage/images/gyms/'. $gym->image) }}" alt="{{ $gym->name}} {{  __('Image') }}">
+                <img class="img-fluid" src="{{ asset('storage/images/gyms/'. $gym->image) }}" alt="{{ $gym->name}} {{  __('Image') }}">
             </div>
             <div class="col-md-6">
                 <p class="lead">
@@ -135,16 +135,6 @@
                 content.classList.add("expanded");
                 toggleButton.innerHTML = "Read Less";
             }
-        }
-
-        scrollToContent();
-        function scrollToContent() {
-            window.addEventListener('DOMContentLoaded', function () {
-                setTimeout(function () {
-                var section = document.getElementById('maincontent');
-                section.scrollIntoView();
-                }, 3000);
-            });
         }
     </script>
 @endsection

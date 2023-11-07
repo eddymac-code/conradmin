@@ -15,10 +15,10 @@ class HomePageController extends Controller
     
     public function index()
     {
-        $page = Page::where('title', 'Overview')->first();
+        $pages = Page::all();
 
-        return view('client.welcome', [
-            'page' => $page
+        return view('client.home', [
+            'pages' => $pages
         ]);
     }
 }

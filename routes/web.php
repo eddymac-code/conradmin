@@ -60,6 +60,9 @@ Route::get('/conference-facilities', [ConferenceFacilitiesPageController::class,
 Route::get('/fun-fitness', [FunAndFitnessPageController::class, 'index'])->name('client.funfitness');
 Route::get('open-air-events', [OpenAirEventsPageController::class, 'index'])->name('client.openairevents');
 Route::get('/contacts', [ContactsPageController::class, 'index'])->name('client.contacts');
+Route::get('/site-map', function(){
+    return view('client.map');
+})->name('client.map');
 Route::get('/order_response', function(){
     return view('client.reservation_response');
 })->name('order.response');

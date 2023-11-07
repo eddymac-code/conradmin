@@ -1,38 +1,37 @@
-@extends('layouts.client')
-
-@section('landing')
-    <div class="pagelanding">
-        <img src="{{ asset('img/office1.jpg') }}" alt="Image 1">
-        <div class="overlay"></div>
-        <div class="text">
-            <p>Serenity and comfort, for all your conference needs.</p>
-        </div>
-    </div>
-@endsection
+@extends('layouts.client-2')
 
 @section('content')
-    <div class="content-box" id="content-box">
+    <div class="pg-landing">
+        <img src="{{ asset('images/office1.jpg') }}" alt="Image 1">
+        <div class="content">
+            <h2>Conferencing</h2>
+            <p>Serenity and comfort, for all your conference needs.</p>
+        </div>
+        <div class="overlay"></div>
+    </div>
+
+    
+    <h2 style="text-align: center; padding: 2em 0 0">Facilities</h2>
+    <div class="pg-showcase">
+        @foreach ($facilities as $facility)
+        <div class="pg-card">
+            <img src="{{ asset('storage/images/conference_facilities/'.$facility->image) }}" alt="facilityimg">
+            <div class="pg-card-info">
+                <h4>{{ $facility->name }}</h4>
+                <p>{{ $facility->about }}</p>
+                <p><strong>Capacity:</strong> {{ $facility->capacity }} {{ Str::plural('person', $facility->capacity) }}</p>
+                <p><strong>Price:</strong> {{ \App\Models\Setting::where('setting_key', 'hotel_currency')->first()->setting_value }} {{ $facility->price }}</p>
+            </div>
+        </div> 
+        @endforeach
+    </div>
+
+    <div class="dark-separator"></div>
+
+    <div class="pg-content-box" id="content-box">
         {!! $page->content !!}
     </div>
-    <span id="toggleButton" onclick="toggleContent()">Read More...</span>
-    <hr>
-    @foreach ($facilities as $facility)
-    <div class="row">
-        <h4>{{ $facility->name }}</h4>
-        <div class="col-6">
-            <div>
-                <img class="rounded feature-img" src="{{ asset('storage/images/conference_facilities/'.$facility->image) }}" alt="facilityimg">
-            </div>
-        </div>
-        <div class="col-6">
-            <div>
-                <p>{{ $facility->about }}</p>
-                <p>Capacity: {{ $facility->capacity }} {{ Str::plural('person', $facility->capacity) }}</p>
-                <p>Price: {{ \App\Models\Setting::where('setting_key', 'hotel_currency')->first()->setting_value }} {{ $facility->price }}</p>
-            </div>
-        </div>
-    </div> 
-    @endforeach
+
 @endsection
 
 @section('footer-scripts')

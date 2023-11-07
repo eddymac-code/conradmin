@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ \App\Models\Setting::where('setting_key', 'hotel_name')->first()->setting_value }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/Conrad-icon.ico') }}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

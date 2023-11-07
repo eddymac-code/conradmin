@@ -30,7 +30,7 @@ class UpdateRoomStatusCommand extends Command
     {
         $now = Carbon::now()->setTime(12, 0, 0);
         $reservations = RoomReservation::where('check_out', $now->toDateString())
-            ->where('time_out','<=', $now->toTimeString())
+            ->where(\App\Models\Setting::where('setting_key', 'time_out')->first()->setting_value,'<=', $now->toTimeString())
             ->where('status', 1)
             ->get();
 

@@ -68,6 +68,14 @@ class SettingSeeder extends Seeder
                 'setting_key' => 'hotel_logo',
                 'setting_value' => '',
             ],
+            [
+                'setting_key' => 'time_in',
+                'setting_value' => '15:00',
+            ],
+            [
+                'setting_key' => 'time_out',
+                'setting_value' => '12:00',
+            ],
         ]);
     }
 }

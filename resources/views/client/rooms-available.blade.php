@@ -1,14 +1,22 @@
-@extends('layouts.client')
+@extends('layouts.client-2')
 
 @section('content')
-    <div class="p-2">
+    <div class="pg-landing">
+      <img src="{{ asset('images/room1.jpg') }}" alt="Image 1">
+      <div class="content">
+          <h2>Comfy, ain't it?</h2>
+      </div>
+      <div class="overlay"></div>
+    </div>
+    {{-- <div class="p-2">
         <h3>{{ __('Please input available dates and number of people') }}</h3>
         @if (session('message'))
             <div class="p-2 my-2 rounded bg-success text-white text-center fw-bold">
                 {{ session('message') }}
             </div> 
         @endif
-        <form class="roomform row" action="{{ route('client.rooms.available') }}" method="post">
+        <div class="container">
+        <form class="row" action="{{ route('client.rooms.available') }}" method="post">
             @csrf
             <div class="col-md-2">
                 <div class="row">
@@ -63,12 +71,51 @@
             </div>
             <button class="btn btn-outline-primary col-md-2" type="submit">Search</button>
         </form>
-    </div>
+        </div>
+    </div> --}}
+
+    <div class="booking-area">
+      <form>
+          <div class="date-input">
+              <label>Checkin and Checkout</label><br>
+              <input class="date" name="daterange" autocomplete="off">
+          </div>
+          <!-- <div class="date-input">
+              <label>Checkout</label><br>
+              <input class="date" id="datepicker-out" name="checkout" autocomplete="off">
+          </div> -->
+          <div class="p-over">
+              <label for="">Occupancy</label><br>
+              <input type="text" class="occupancy" name="occupancy" id="guestsInput" readonly>
+              <div class="p-over-content">
+                  <div class="p-over-row">
+                      <span class="p-over-label">Adults:</span>
+                      <div class="p-over-value">
+                          <button id="adultsDecrement">-</button>
+                          <span id="adultsCount">1</span>
+                          <button id="adultsIncrement">+</button>
+                      </div>
+                  </div>
+                  <div class="p-over-row">
+                      <span class="p-over-label">Children:</span>
+                      <div class="p-over-value">
+                          <button id="childrenDecrement">-</button>
+                          <span id="childrenCount">0</span>
+                          <button id="childrenIncrement">+</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div>
+              <button class="booking-btn" type="submit">Check Availability</button>
+          </div>
+      </form>
+  </div>
 
     @if (!empty($checkin))
         <div class="p-2">
             <div class="my-2">
-                <a href="{{ route('client.rooms.available') }}" class="btn btn-light float-md-end">Reset</a>
+                <a href="{{ route('client.rooms.available') }}" class="btn btn-outline-primary border float-md-end">Reset</a>
             </div>
             <div class="clearfix"></div>
         @php
@@ -116,82 +163,82 @@
     flatpickr("input[type=datetime-local]");
 </script>
 <script>
-    // for showing popover on guests occupancy input
-var adultsCount = 1;
-    var childrenCount = 0;
-    var guestsInput = document.getElementById('guestsInput');
-    var adultsCountElement = document.getElementById('adultsCount');
-    var childrenCountElement = document.getElementById('childrenCount');
-    var popover = document.querySelector('.p-over');
-    var popoverContent = document.querySelector('.p-over-content');
+  var adultsCount = 1;
+var childrenCount = 0;
+var guestsInput = document.getElementById('guestsInput');
+var adultsCountElement = document.getElementById('adultsCount');
+var childrenCountElement = document.getElementById('childrenCount');
+var popover = document.querySelector('.p-over');
+var popoverContent = document.querySelector('.p-over-content');
 
-    function updateGuestsInput() {
-      var adultsText = adultsCount === 1 ? 'adult' : 'adults';
-      var childrenText = childrenCount === 1 ? 'child' : 'children';
-      guestsInput.value = adultsCount + ' ' + adultsText + ' ' + childrenCount + ' ' + childrenText;
-    }
+function updateGuestsInput() {
+    var adultsText = adultsCount === 1 ? 'adult' : 'adults';
+    var childrenText = childrenCount === 1 ? 'child' : 'children';
+    guestsInput.value = adultsCount + ' ' + adultsText + ' ' + childrenCount + ' ' + childrenText;
+}
 
-    function updateCounts() {
-      adultsCountElement.textContent = adultsCount;
-      childrenCountElement.textContent = childrenCount;
-      updateGuestsInput();
-    }
-
-    function decrementCount(type) {
-      if (type === 'adults') {
-        if (adultsCount > 1) {
-          adultsCount--;
-        }
-      } else if (type === 'children') {
-        if (childrenCount > 0) {
-          childrenCount--;
-        }
-      }
-      updateCounts();
-    }
-
-    function incrementCount(type) {
-      if (type === 'adults') {
-        adultsCount++;
-      } else if (type === 'children') {
-        childrenCount++;
-      }
-      updateCounts();
-    }
-
-    function handleClickOutside(event) {
-      if (!popover.contains(event.target)) {
-        popover.classList.remove('active');
-      }
-    }
-
-    document.getElementById('adultsDecrement').addEventListener('click', function (event) {
-      event.preventDefault();
-      decrementCount('adults');
-    });
-
-    document.getElementById('adultsIncrement').addEventListener('click', function (event) {
-      event.preventDefault();
-      incrementCount('adults');
-    });
-
-    document.getElementById('childrenDecrement').addEventListener('click', function (event) {
-      event.preventDefault();
-      decrementCount('children');
-    });
-
-    document.getElementById('childrenIncrement').addEventListener('click', function (event) {
-      event.preventDefault();
-      incrementCount('children');
-    });
-
-    guestsInput.addEventListener('click', function (event) {
-      event.preventDefault();
-      popover.classList.toggle('active');
-    });
-
-    document.addEventListener('click', handleClickOutside);
-
+function updateCounts() {
+    adultsCountElement.textContent = adultsCount;
+    childrenCountElement.textContent = childrenCount;
     updateGuestsInput();
+}
+
+function decrementCount(type) {
+    if (type === 'adults') {
+        if (adultsCount > 1) {
+            adultsCount--;
+        }
+    } else if (type === 'children') {
+        if (childrenCount > 0) {
+            childrenCount--;
+        }
+    }
+    updateCounts();
+}
+
+function incrementCount(type) {
+    if (type === 'adults') {
+        adultsCount++;
+    } else if (type === 'children') {
+        childrenCount++;
+    }
+    updateCounts();
+}
+
+function handleClickOutside(event) {
+    if (!popover.contains(event.target)) {
+        popover.classList.remove('active');
+    }
+}
+
+document.getElementById('adultsDecrement').addEventListener('click', function (event) {
+    event.preventDefault();
+    decrementCount('adults');
+});
+
+document.getElementById('adultsIncrement').addEventListener('click', function (event) {
+    event.preventDefault();
+    incrementCount('adults');
+});
+
+document.getElementById('childrenDecrement').addEventListener('click', function (event) {
+    event.preventDefault();
+    decrementCount('children');
+});
+
+document.getElementById('childrenIncrement').addEventListener('click', function (event) {
+    event.preventDefault();
+    incrementCount('children');
+});
+
+guestsInput.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log('Guests Input clicked!');
+    popover.classList.toggle('active');
+});
+
+document.addEventListener('click', handleClickOutside);
+
+updateGuestsInput();
 </script>
 @endsection
